@@ -1,4 +1,2 @@
 #Monopoly
-
-Monopoly clone written in Java for SER 215.
-
+A Monopoly clone written in Java for SER 215.
