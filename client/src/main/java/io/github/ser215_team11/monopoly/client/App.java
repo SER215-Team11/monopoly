@@ -1,4 +1,4 @@
-package io.github.ser215_team11;
+package io.github.ser215_team11.monopoly.client;
 
 /**
  * Entry point of the client application.
