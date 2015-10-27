@@ -1,0 +1,72 @@
+{
+	"cards": [
+		{
+			"description": "Advance to Go",
+			"script": "/scripts/advance-to-go.lua"
+		},
+		{
+			"description": "Bank error in your favor\\nCollect $200",
+			"script": "/scripts/bank-error.lua"
+		},
+		{
+			"description": "Doctor's fees\\nPay $50",
+			"script": "/scripts/doctors-fee.lua"
+		},
+		{
+			"description": "From sale of stock you get $50",
+			"script": "/scripts/stock.lua"
+		},
+		{
+			"description": "Get Out of Jail Free\\n This card may be kept until needed or sold",
+			"script": "/scripts/jail-free.lua"
+		},
+		{
+			"description": "Go to Jail\\n Go directly to jail\\nDo not pass Go\\nDo not collect $200",
+			"script": "/scripts/go-to-jail.lua"
+		},
+		{
+			"description": "Grand Opera Night\\nCollect $50 from every player for opening night seats",
+			"script": "/scripts/opera-night.lua"
+		},
+		{
+			"description": "Holiday Fund matures\\nRecieve $100",
+			"script": "/scripts/doctors-fee.lua"
+		},
+		{
+			"description": "Income tax refund\\nCollect $20",
+			"script": "/scripts/income-tax-refund.lua"
+		},
+		{
+			"description": "It is your birthday\\nCollect $10 from each player",
+			"script": "/scripts/birthday.lua"
+		},
+		{
+			"description": "Life insurance matures\\nCollect $100",
+			"script": "/scripts/life-insurance.lua"
+		},
+		{
+			"description": "Pay hospital fees of $100",
+			"script": "/scripts/hospital-fees.lua"
+		},
+		{
+			"description": "Pay school fees of $150",
+			"script": "/scripts/school-fees.lua"
+		},
+		{
+			"description": "Recieve $25 consultancy fee",
+			"script": "/scripts/consultancy-fee.lua"
+		},
+		{
+			"description": "You are assessed for street repairs\\n$40 per house\\n$115 per hotel",
+			"script": "/scripts/street-repairs.lua"
+		},
+		{
+			"description": "You have won second prize in a beauty contest\\nCollect $10",
+			"script": "/scripts/beauty-contest.lua"
+		},
+		{
+			"description": "You inherit $100",
+			"script": "/scripts/inherit.lua"
+		}
+	]
+}

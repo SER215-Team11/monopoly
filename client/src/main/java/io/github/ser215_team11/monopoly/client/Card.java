@@ -11,30 +11,18 @@ import org.luaj.vm2.lib.jse.JsePlatform;
  */
 public class Card {
 
-	private String name;
 	private String description;
 	private String script;
 
 	/**
-	 * Constructs a new card with the given name, description, and Lua script.
+	 * Constructs a new card with the given description and Lua script.
 	 *
-	 * @param name the name of the card
 	 * @param description a description of what the card does
 	 * @param script a Lua script that executes the card's task
 	 */
-	public Card(String name, String description, String script) {
-		this.name = name;
+	public Card(String description, String script) {
 		this.description = description;
 		this.script = script;
-	}
-
-	/**
-	 * Returns the name of the card.
-	 *
-	 * @return card name
-	 */
-	public String getName() {
-		return name;
 	}
 
 	/**

@@ -1,0 +1,44 @@
+{
+	"cards": [
+		{
+			"description": "a",
+			"script": "/script/myScript.lua"
+		},
+		{
+			"description": "b",
+			"script": ""
+		},
+		{
+			"description": "c",
+			"script": ""
+		},
+		{
+			"description": "d",
+			"script": ""
+		},
+		{
+			"description": "e",
+			"script": ""
+		},
+		{
+			"description": "f",
+			"script": ""
+		},
+		{
+			"description": "g",
+			"script": ""
+		},
+		{
+			"description": "h",
+			"script": ""
+		},
+		{
+			"description": "i",
+			"script": ""
+		},
+		{
+			"description": "j",
+			"script": ""
+		}
+	]
+}

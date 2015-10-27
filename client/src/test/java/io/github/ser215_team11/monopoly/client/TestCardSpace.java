@@ -8,6 +8,8 @@ import junit.framework.Assert;
 import java.util.Map;
 import java.util.HashMap;
 
+import java.io.IOException;
+
 /**
  * Tests the card space class.
  */
@@ -24,23 +26,15 @@ public class TestCardSpace extends TestCase {
 	/**
 	 * Tests that no repeats appear when cards are drawn.
 	 */
-	public void testNoRepeats() {
+	public void testNoRepeats() throws IOException {
 		// Use a hash map to keep track of drawn cards
 		Map<Card, Integer> drawnCards = new HashMap<>();
 
-		// Make an array of cards with a unique set of names
-		Card []cards = new Card[50];
-		for(int i=0; i<cards.length; i++) {
-			String name = "";
-			for(int j=0; j<i; j++) {
-				name += "T";
-			}
-			cards[i] = new Card(name, "", "");
-		}
-
-		CardSpace cardSpace = new CardSpace("Community Chest", cards);
+		CardSpace cardSpace = new CardSpace("Community Chest", this.getClass().getResource("/config/test-cards.json").getPath());
+		// Check that all the cards were loaded
+		Assert.assertEquals("fewer cards were loaded than expected", cardSpace.getCardCnt(), 10);
 		// Draw all the cards
-		for(int i=0; i<cards.length; i++) {
+		for(int i=0; i<cardSpace.getCardCnt(); i++) {
 			Card card = cardSpace.draw();
 			// Check if the card has already been drawn
 			if(drawnCards.containsKey(card)) {
@@ -48,28 +42,22 @@ public class TestCardSpace extends TestCase {
 			}
 			drawnCards.put(card, 0);	// Register that the card has been drawn
 		}
+		// Check that all the cards were drawn
+		Assert.assertEquals(drawnCards.size(), 10);
 	}
 
 	/**
 	 * Tests that repeats happen when the deck is empty.
 	 */
-	public void testRepeatsOnEmptyDeck() {
+	public void testRepeatsOnEmptyDeck() throws IOException {
 		// Use a hash map to keep track of drawn cards
 		Map<Card, Integer> drawnCards = new HashMap<>();
 
-		// Make an array of cards with a unique set of names
-		Card []cards = new Card[50];
-		for(int i=0; i<cards.length; i++) {
-			String name = "";
-			for(int j=0; j<i; j++) {
-				name += "T";
-			}
-			cards[i] = new Card(name, "", "");
-		}
-
-		CardSpace cardSpace = new CardSpace("Community Chest", cards);
+		CardSpace cardSpace = new CardSpace("Community Chest", this.getClass().getResource("/config/test-cards.json").getPath());
+		// Check that all the cards were loaded
+		Assert.assertEquals("fewer cards were loaded than expected", cardSpace.getCardCnt(), 10);
 		// Draw all the cards
-		for(int i=0; i<cards.length; i++) {
+		for(int i=0; i<cardSpace.getCardCnt(); i++) {
 			Card card = cardSpace.draw();
 			// Check if the card has already been drawn
 			if(drawnCards.containsKey(card)) {
@@ -77,8 +65,10 @@ public class TestCardSpace extends TestCase {
 			}
 			drawnCards.put(card, 0);	// Register that the card has been drawn
 		}
+		// Check that all the cards were drawn
+		Assert.assertEquals("fewer cards were drawn than expected", drawnCards.size(), 10);
 		// Draw all the cards again
-		for(int i=0; i<cards.length; i++) {
+		for(int i=0; i<cardSpace.getCardCnt(); i++) {
 			Card card = cardSpace.draw();
 			// Check if the card has not already been drawn
 			if(!drawnCards.containsKey(card)) {
@@ -86,6 +76,8 @@ public class TestCardSpace extends TestCase {
 			}
 			drawnCards.remove(card);	// Register that the card has been redrawn
 		}
+		// Check that all the cards were redrawn
+		Assert.assertEquals("fewer cards were redrawn than expected", drawnCards.size(), 0);
 	}
 
 }
