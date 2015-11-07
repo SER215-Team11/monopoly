@@ -56,33 +56,112 @@ public class PlayerLuaLibrary extends TwoArgFunction {
 		LuaValue library = tableOf();
 
 		// Make functions available to Lua
-		library.set("test", new TestFunction());
+		library.set("giveMoney", new GiveMoneyFunction());
+		library.set("takeMoney", new TakeMoneyFunction());
+		library.set("giveGetOutOfJailFreeCard", new GiveGetOutOfJailFreeCardFunction());
+		library.set("sendToJail", new SendToJailFunction());
+		library.set("getHouseCnt", new GetHouseCntFunction());
+		library.set("getHotelCnt", new GetHotelCntFunction());
 
 		return library;
 	}
 
 	/**
-	 * Implements a test function that does nothing. This is used to check if
-	 * Lua is able to call functions correctly. This may be removable after the
-	 * player class is implemented.
+	 * Implements a function that gives the player money.
 	 */
-	static class TestFunction extends ZeroArgFunction {
-		/**
-		 * An empty constructor. If this isn't here, Luaj won't find this library.
-		 */
-		public TestFunction() {
+	static class GiveMoneyFunction extends OneArgFunction {
+		public GiveMoneyFunction() {
 		}
 
-		/**
-		 * This method is called when the test function is called. This does
-		 * nothing. We should never need to call this method.
-		 *
-		 * @return nil
-		 */
+		@Override
+		public LuaValue call(LuaValue amount) {
+			synchronized(target) {
+				int amountInt = amount.checkint();
+				target.giveMoney(amountInt);
+
+				return LuaValue.NIL;
+			}
+		}
+	}
+
+	/**
+	 * Implements a function that takes money from the player.
+	 */
+	static class TakeMoneyFunction extends OneArgFunction {
+		public TakeMoneyFunction() {
+		}
+
+		@Override
+		public LuaValue call(LuaValue amount) {
+			synchronized(target) {
+				int amountInt = amount.checkint();
+				target.takeMoney(amountInt);
+
+				return LuaValue.NIL;
+			}
+		}
+	}
+
+	/**
+	 * Implements a function that gives the player a Get Out of Jail Free card.
+	 */
+	static class GiveGetOutOfJailFreeCardFunction extends ZeroArgFunction {
+		public GiveGetOutOfJailFreeCardFunction() {
+		}
+
 		@Override
 		public LuaValue call() {
 			synchronized(target) {
+				target.giveGetOutOfJailFreeCard();
 				return LuaValue.NIL;
+			}
+		}
+	}
+
+	/**
+	 * Implements a function that sends the player to jail.
+	 */
+	static class SendToJailFunction extends ZeroArgFunction {
+		public SendToJailFunction() {
+		}
+
+		@Override
+		public LuaValue call() {
+			synchronized(target) {
+				target.set_turns_left_in_jail(3);
+				return LuaValue.NIL;
+			}
+		}
+	}
+
+	/**
+	 * Implements a function that returns the player's total house count.
+	 */
+	static class GetHouseCntFunction extends ZeroArgFunction {
+		public GetHouseCntFunction() {
+		}
+
+		@Override
+		public LuaValue call() {
+			synchronized(target) {
+				// TODO: Count the player's total houses when the properties class is implemented
+				return LuaValue.valueOf(3);
+			}
+		}
+	}
+
+	/**
+	 * Implements a function that returns the player's total hotel count.
+	 */
+	static class GetHotelCntFunction extends ZeroArgFunction {
+		public GetHotelCntFunction() {
+		}
+
+		@Override
+		public LuaValue call() {
+			synchronized(target) {
+				// TODO: Count the player's total hotels when the properties class is implemented
+				return LuaValue.valueOf(5);
 			}
 		}
 	}
