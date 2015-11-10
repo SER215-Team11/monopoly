@@ -30,7 +30,7 @@
 		},
 		{
 			"description": "Holiday Fund matures\\nRecieve $100",
-			"script": "/scripts/doctors-fee.lua"
+			"script": "/scripts/holiday-fund.lua"
 		},
 		{
 			"description": "Income tax refund\\nCollect $20",
