@@ -30,7 +30,7 @@ public class TestCardSpace extends TestCase {
 		// Use a hash map to keep track of drawn cards
 		Map<Card, Integer> drawnCards = new HashMap<>();
 
-		CardSpace cardSpace = new CardSpace("Community Chest", this.getClass().getResource("/config/test-cards.json").getPath());
+		CardSpace cardSpace = new CardSpace("Community Chest", Resources.path("/config/test-cards.json"));
 		// Check that all the cards were loaded
 		Assert.assertEquals("fewer cards were loaded than expected", cardSpace.getCardCnt(), 10);
 		// Draw all the cards
