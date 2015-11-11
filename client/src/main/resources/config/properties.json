@@ -1,19 +1,298 @@
 {
 	"properties": [
 		{
-			"name": "",
-			"rent": "",
-			"rent1": "",
-			"rent2": "",
-			"rent3": "",
-			"rent4": "",
-			"rentH": "",
-			"mortgage": "",
-			
+			"name": "Mediterranean Ave.",
+			"rent": "2",
+			"rent1": "10",
+			"rent2": "30",
+			"rent3": "90",
+			"rent4": "160",
+			"rentH": "250",
+			"mortgage": "30",
+			"houseCost": "50",
+			"hotelCost": "50"
 		},
 		{
-			"name": "",
-			"rent": "",
+			"name": "Baltic Ave.",
+			"rent": "4",
+			"rent1": "20",
+			"rent2": "60",
+			"rent3": "180",
+			"rent4": "320,
+			"rentH": "459",
+			"mortgage": "30",
+			"houseCost": "50",
+			"hotelCost": "50"
+		},
+		{
+			"name": "Oriental Ave.",
+			"rent": "6",
+			"rent1": "30",
+			"rent2": "60",
+			"rent3": "270",
+			"rent4": "400",
+			"rentH": "550",
+			"mortgage": "50",
+			"houseCost": "50",
+			"hotelCost": "50"
+		},		{
+			"name": "Vermont Ave.",
+			"rent": "6",
+			"rent1": "30",
+			"rent2": "90",
+			"rent3": "270",
+			"rent4": "400",
+			"rentH": "550",
+			"mortgage": "50",
+			"houseCost": "50",
+			"hotelCost": "50"
+		},
+				{
+			"name": "Conneticut Ave.",
+			"rent": "8",
+			"rent1": "40",
+			"rent2": "100",
+			"rent3": "300",
+			"rent4": "450",
+			"rentH": "600",
+			"mortgage": "60",
+			"houseCost": "50",
+			"hotelCost": "50"
+		},		{
+			"name": "St. Charles Place",
+			"rent": "10",
+			"rent1": "50",
+			"rent2": "150",
+			"rent3": "450",
+			"rent4": "625",
+			"rentH": "750",
+			"mortgage": "70",
+			"houseCost": "100",
+			"hotelCost": "100"
+		},		{
+			"name": "States Ave.",
+			"rent": "10",
+			"rent1": "50",
+			"rent2": "150",
+			"rent3": "450",
+			"rent4": "625",
+			"rentH": "750",
+			"mortgage": "70",
+			"houseCost": "100",
+			"hotelCost": "100"
+		},		{
+			"name": "Virginia Ave.",
+			"rent": "12",
+			"rent1": "60",
+			"rent2": "180",
+			"rent3": "500",
+			"rent4": "700",
+			"rentH": "900",
+			"mortgage": "80",
+			"houseCost": "100",
+			"hotelCost": "100"
+		},		{
+			"name": "St. James Place",
+			"rent": "14",
+			"rent1": "70",
+			"rent2": "200",
+			"rent3": "550",
+			"rent4": "750",
+			"rentH": "950",
+			"mortgage": "90",
+			"houseCost": "100",
+			"hotelCost": "100"
+		},		{
+			"name": "Tennessee Ave.",
+			"rent": "14",
+			"rent1": "70",
+			"rent2": "200",
+			"rent3": "550",
+			"rent4": "750",
+			"rentH": "950",
+			"mortgage": "90",
+			"houseCost": "100",
+			"hotelCost": "100"
+		},		{
+			"name": "New York Ave.",
+			"rent": "16",
+			"rent1": "80",
+			"rent2": "220",
+			"rent3": "600",
+			"rent4": "800",
+			"rentH": "1000",
+			"mortgage": "100",
+			"houseCost": "100",
+			"hotelCost": "100"
+		},
+				{
+			"name": "Kentucky Ave.",
+			"rent": "18",
+			"rent1": "90",
+			"rent2": "250",
+			"rent3": "700",
+			"rent4": "875",
+			"rentH": "1050",
+			"mortgage": "110",
+			"houseCost": "150",
+			"hotelCost": "150"
+		},		{
+			"name": "Indiana Ave.",
+			"rent": "18",
+			"rent1": "90",
+			"rent2": "250",
+			"rent3": "700",
+			"rent4": "875",
+			"rentH": "1050",
+			"mortgage": "110",
+			"houseCost": "150",
+			"hotelCost": "150"
+		},		{
+			"name": "Illinois Ave.",
+			"rent": "20",
+			"rent1": "100",
+			"rent2": "300",
+			"rent3": "750",
+			"rent4": "925",
+			"rentH": "1100",
+			"mortgage": "120",
+			"houseCost": "150",
+			"hotelCost": "150"
+		},		{
+			"name": "Atlantic Ave.",
+			"rent": "22",
+			"rent1": "110",
+			"rent2": "330",
+			"rent3": "800",
+			"rent4": "975",
+			"rentH": "1150",
+			"mortgage": "130",
+			"houseCost": "150",
+			"hotelCost": "150"
+		},		{
+			"name": "Ventor Ave.",
+			"rent": "22",
+			"rent1": "110",
+			"rent2": "330",
+			"rent3": "800",
+			"rent4": "975",
+			"rentH": "1150",
+			"mortgage": "130",
+			"houseCost": "150",
+			"hotelCost": "150"
+		},		{
+			"name": "Marvin Gardens",
+			"rent": "24",
+			"rent1": "120",
+			"rent2": "360",
+			"rent3": "850",
+			"rent4": "1025",
+			"rentH": "1200",
+			"mortgage": "140",
+			"houseCost": "150",
+			"hotelCost": "150"
+		},		{
+			"name": "Pacific Ave.",
+			"rent": "26",
+			"rent1": "130",
+			"rent2": "390",
+			"rent3": "900",
+			"rent4": "1100",
+			"rentH": "1275",
+			"mortgage": "150",
+			"houseCost": "200",
+			"hotelCost": "200"
+		},		{
+			"name": "No. Carolina Ave.",
+			"rent": "26",
+			"rent1": "130",
+			"rent2": "390",
+			"rent3": "900",
+			"rent4": "1100",
+			"rentH": "1275",
+			"mortgage": "150",
+			"houseCost": "200",
+			"hotelCost": "200"
+		},		{
+			"name": "Pennsylvania Ave.",
+			"rent": "28",
+			"rent1": "150",
+			"rent2": "450",
+			"rent3": "1000",
+			"rent4": "1200",
+			"rentH": "1400",
+			"mortgage": "160",
+			"houseCost": "200",
+			"hotelCost": "200"
+		},		{
+			"name": "Park Place",
+			"rent": "35",
+			"rent1": "175",
+			"rent2": "500",
+			"rent3": "1100",
+			"rent4": "1300",
+			"rentH": "1500",
+			"mortgage": "175",
+			"houseCost": "200",
+			"hotelCost": "200"
+		},		{
+			"name": "Boardwalk",
+			"rent": "50",
+			"rent1": "200",
+			"rent2": "600",
+			"rent3": "1400",
+			"rent4": "1700",
+			"rentH": "2000",
+			"mortgage": "200",
+			"houseCost": "200",
+			"hotelCost": "200"
+		},		{
+			"name": "Reading Railroad",
+			"rent1": "25",
+			"rent2": "50",
+			"rent3": "100",
+			"rent4": "200",
+			"mortgage": "100"
+		},		{
+			"name": "Pennsylvania R.R.",
+			"rent1": "25",
+			"rent2": "50",
+			"rent3": "100",
+			"rent4": "200",
+			"mortgage": "100"
+		},		{
+			"name": "B. & O. Railroad",
+			"rent1": "25",
+			"rent2": "50",
+			"rent3": "100",
+			"rent4": "200",
+			"mortgage": "100"
+		},		{
+			"name": "Short Line R.R.",
+			"rent1": "25",
+			"rent2": "50",
+			"rent3": "100",
+			"rent4": "200",
+			"mortgage": "100"
+		},
+				{
+			"name": "Reading Railroad",
+			"rent1": "25",
+			"rent2": "50",
+			"rent3": "100",
+			"rent4": "200",
+			"mortgage": "100"
+		},
+				{
+			"name": "Electric Company",
+			"rent1": "4 * dice",
+			"rent2": "10 * dice",
+			"mortgage": "75"
+		},				{
+			"name": "Water Works",
+			"rent1": "4 * dice",
+			"rent2": "10 * dice",
+			"mortgage": "75"
 		}
 	]
 }
