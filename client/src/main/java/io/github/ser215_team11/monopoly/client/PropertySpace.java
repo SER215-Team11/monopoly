@@ -34,5 +34,26 @@ public class PropertySpace implements BoardSpace {
 		public Property getProperty() {
 			return property;
 		}
+		
+		private Property[] parseConfig(String path) throws IOException {
+			byte[] encoded = Files.readAllBytes(Paths.get(path));
+			String data = new String(encoded, StandardCharsets.UTF_8);
+
+			JSONObject parent = new JSONObject(data);
+
+			JSONArray jsonProperties = parent.getJSONArray("properties");
+			Property[] out = new Property[jsonCards.length()];
+			for(int i=0; i<jsonCards.length(); i++) {
+				JSONObject jsonProperty = jsonProperties.getJSONObject(i);
+				out[i] = new Card(jsonProperty.getString("name"),
+						jsonProperty.getInt("rent"),jsonProperty.getInt("rent1"),
+						jsonProperty.getInt("rent2"),jsonProperty.getInt("rent3"),
+						jsonProperty.getInt("rent4"),jsonProperty.getInt("rentH"),
+						jsonProperty.getInt("mortgage"),jsonProperty.getInt("houseCost"),
+						jsonProperty.getInt("hotelCost"));
+			}
+
+			return out;
+		}
 
 }
