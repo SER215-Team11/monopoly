@@ -27,7 +27,7 @@ public class PropertySpace implements BoardSpace {
 		}
 
 		/**
-		 * Returns the property this space reprsents.
+		 * Returns the property this space represents.
 		 *
 		 * @return property
 		 */

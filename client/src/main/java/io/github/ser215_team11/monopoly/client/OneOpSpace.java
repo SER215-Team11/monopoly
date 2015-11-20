@@ -14,7 +14,7 @@ public abstract class OneOpSpace implements BoardSpace {
 	public abstract String getName();
 
 	/**
-	 * Excecutes the task of the one op space on the given player.
+	 * Executes the task of the one op space on the given player.
 	 *
 	 * @param player the player that landed on the space
 	 */

@@ -21,9 +21,7 @@ public class PlayerLuaLibrary extends TwoArgFunction {
 	 * @return player to be modified
 	 */
 	public static Player getTarget() {
-		synchronized(target) {
-			return target;
-		}
+		return target;
 	}
 
 	/**
@@ -33,9 +31,7 @@ public class PlayerLuaLibrary extends TwoArgFunction {
 	 * @param target new player to be modified
 	 */
 	public static void setTarget(Player target) {
-		synchronized(target) {
-			PlayerLuaLibrary.target = target;
-		}
+		PlayerLuaLibrary.target = target;
 	}
 
 	/**
@@ -46,7 +42,7 @@ public class PlayerLuaLibrary extends TwoArgFunction {
 
 	/**
 	 * Called by the Lua interpreter when this library is included. Does the
-	 * necessary initalization steps. We should never need to call this method.
+	 * necessary initialization steps. We should never need to call this method.
 	 *
 	 * @param modname the name of this library
 	 * @param env the global Lua scope
@@ -75,12 +71,10 @@ public class PlayerLuaLibrary extends TwoArgFunction {
 
 		@Override
 		public LuaValue call(LuaValue amount) {
-			synchronized(target) {
-				int amountInt = amount.checkint();
-				target.giveMoney(amountInt);
+			int amountInt = amount.checkint();
+			target.giveMoney(amountInt);
 
-				return LuaValue.NIL;
-			}
+			return LuaValue.NIL;
 		}
 	}
 
@@ -93,12 +87,10 @@ public class PlayerLuaLibrary extends TwoArgFunction {
 
 		@Override
 		public LuaValue call(LuaValue amount) {
-			synchronized(target) {
-				int amountInt = amount.checkint();
-				target.takeMoney(amountInt);
+			int amountInt = amount.checkint();
+			target.takeMoney(amountInt);
 
-				return LuaValue.NIL;
-			}
+			return LuaValue.NIL;
 		}
 	}
 
@@ -111,10 +103,8 @@ public class PlayerLuaLibrary extends TwoArgFunction {
 
 		@Override
 		public LuaValue call() {
-			synchronized(target) {
-				target.giveGetOutOfJailFreeCard();
-				return LuaValue.NIL;
-			}
+			target.giveGetOutOfJailFreeCard();
+			return LuaValue.NIL;
 		}
 	}
 
@@ -127,10 +117,8 @@ public class PlayerLuaLibrary extends TwoArgFunction {
 
 		@Override
 		public LuaValue call() {
-			synchronized(target) {
-				target.set_turns_left_in_jail(3);
-				return LuaValue.NIL;
-			}
+			target.set_turns_left_in_jail(3);
+			return LuaValue.NIL;
 		}
 	}
 
@@ -143,10 +131,8 @@ public class PlayerLuaLibrary extends TwoArgFunction {
 
 		@Override
 		public LuaValue call() {
-			synchronized(target) {
-				// TODO: Count the player's total houses when the properties class is implemented
-				return LuaValue.valueOf(3);
-			}
+			// TODO: Count the player's total houses when the properties class is implemented
+			return LuaValue.valueOf(3);
 		}
 	}
 
@@ -159,10 +145,8 @@ public class PlayerLuaLibrary extends TwoArgFunction {
 
 		@Override
 		public LuaValue call() {
-			synchronized(target) {
-				// TODO: Count the player's total hotels when the properties class is implemented
-				return LuaValue.valueOf(5);
-			}
+			// TODO: Count the player's total hotels when the properties class is implemented
+			return LuaValue.valueOf(5);
 		}
 	}
 

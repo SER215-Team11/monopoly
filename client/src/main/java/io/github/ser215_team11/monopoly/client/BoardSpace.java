@@ -9,5 +9,5 @@ public interface BoardSpace {
 	 *
 	 * @return unique space name
 	 */
-	public String getName();
+	String getName();
 }

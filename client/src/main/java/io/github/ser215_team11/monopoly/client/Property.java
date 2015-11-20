@@ -1,7 +1,7 @@
 package io.github.ser215_team11.monopoly.client;
 
 /**
- * A generic, ownable, and mortgagable property that opposing players pay rent
+ * A generic, own-able, and mortgage-able property that opposing players pay rent
  * on.
  */
 public interface Property {

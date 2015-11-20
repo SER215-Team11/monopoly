@@ -135,7 +135,7 @@ public class TestPlayerLuaLibrary extends TestCase {
 	/**
 	 * Tests that functions that don't exist will throw an error if called.
 	 */
-	public void testFailsOnNonexistantFunctions() {
+	public void testFailsOnNonexistentFunctions() {
 		PlayerLuaLibrary.setTarget(new Player());
 		Globals globals = JsePlatform.standardGlobals();
 		LuaValue chunk = globals.load(

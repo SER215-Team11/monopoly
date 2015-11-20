@@ -27,6 +27,7 @@ public class CardSpace implements BoardSpace {
 	 * @param config path to a config file with card information
 	 */
 	public CardSpace(String name, String config) throws IOException {
+		this.name = name;
 		this.cards = parseConfig(config);
 
 		this.drawPlace = 0;
