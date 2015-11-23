@@ -127,6 +127,11 @@ public class Board {
         }
     }
 
+    /**
+     * Draws the board on screen.
+     * @param g graphics context
+     * @param observer image observer
+     */
     public void draw(Graphics g, ImageObserver observer) {
         g.drawImage(center, x, y, observer);
         for(BoardSpace space : spaces) {

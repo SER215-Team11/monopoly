@@ -29,6 +29,13 @@ public class TitleScreen {
     private int playerCnt;
     private boolean finished;
 
+    /**
+     * Load resources for the title screen.
+     * @param parent The parent JFrame that receives user input
+     * @param screenWidth the width of the destination screen
+     * @param screenHeight the height of the destination screen
+     * @throws IOException, FontFormatException lack of resources. This should bubble up to the top
+     */
     public TitleScreen(JFrame parent, int screenWidth, int screenHeight) throws IOException, FontFormatException {
         this.screenWidth = screenWidth;
         this.screenHeight = screenHeight;
@@ -76,6 +83,7 @@ public class TitleScreen {
 
         menues.put(MenuType.PLAYER_COUNT, playerCount);
 
+        // Set up the positions of the buttons
         for(ArrayList<Button> menu : menues.values()) {
             Button button = menu.get(0);
             button.setX((screenWidth / 2) - (button.getWidth() / 2));
@@ -90,6 +98,7 @@ public class TitleScreen {
             }
         }
 
+        // Start at the main menu
         switchMenu(MenuType.MAIN);
     }
 
@@ -109,6 +118,11 @@ public class TitleScreen {
         }
     }
 
+    /**
+     * Draws the title screen.
+     * @param g graphics context
+     * @param observer image observer, usually "this".
+     */
     public void draw(Graphics g, ImageObserver observer) {
         logo.draw(g, observer);
 
@@ -118,10 +132,19 @@ public class TitleScreen {
         }
     }
 
+    /**
+     * Returns true if the title screen has finished and the next screen should
+     * start.
+     * @return true if title screen is finished
+     */
     public boolean getFinished() {
         return finished;
     }
 
+    /**
+     * Returns the amount of players the user wants.
+     * @return player count
+     */
     public int getPlayerCnt() {
         return playerCnt;
     }

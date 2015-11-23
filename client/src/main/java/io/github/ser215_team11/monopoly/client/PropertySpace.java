@@ -29,10 +29,18 @@ public class PropertySpace implements BoardSpace {
 		return "shim";
 	}
 
+	/**
+	 * Return the current sprite being drawn.
+	 * @return current sprite
+     */
 	public Sprite getSprite() {
 		return sprite;
 	}
 
+	/**
+	 * Sets the sprite to be drawn to the given sprite.
+	 * @param sprite sprite to draw
+     */
 	public void setSprite(Sprite sprite) {
 		this.sprite = sprite;
 	}

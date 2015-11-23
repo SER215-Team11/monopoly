@@ -13,9 +13,22 @@ public interface BoardSpace {
 	 */
 	String getName();
 
+	/**
+	 * Draws the board space on screen.
+	 * @param g graphics context
+	 * @param observer image observer
+     */
 	void draw(Graphics g, ImageObserver observer);
 
+	/**
+	 * Sets the sprite to be drawn to the given sprite.
+	 * @param sprite sprite to draw
+     */
 	void setSprite(Sprite sprite);
 
+	/**
+	 * Returns the current sprite that is being drawn.
+	 * @return current sprite
+     */
 	Sprite getSprite();
 }
