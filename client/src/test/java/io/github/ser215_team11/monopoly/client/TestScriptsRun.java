@@ -10,6 +10,7 @@ import org.luaj.vm2.LuaError;
 import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.lib.jse.JsePlatform;
 
+import java.awt.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.charset.StandardCharsets;
@@ -34,7 +35,7 @@ public class TestScriptsRun extends TestCase {
 	/**
 	 * Tests scripts for syntax errors by running them.
 	 */
-	public void testScriptsRun() throws IOException {
+	public void testScriptsRun() throws IOException, FontFormatException {
 		// Loop through every script in the scripts directory
 		Files.walk(Paths.get(Resources.path("/scripts/"))).forEach(filePath -> {
 			// Check that the "file" is actually a file and not a directory
@@ -56,6 +57,11 @@ public class TestScriptsRun extends TestCase {
 					players.add(new Player());
 				}
 				PlayerLuaLibrary.setPlayers(players);
+				try {
+					BoardLuaLibrary.setBoard(new Board(0, 0, "/config/board.json"));
+				} catch(Exception e) {
+					fail(e.getMessage());
+				}
 				Globals globals = JsePlatform.standardGlobals();
 				LuaValue chunk = globals.load(script);
 				try {
