@@ -1,38 +1,41 @@
 package io.github.ser215_team11.monopoly.client;
 
+import java.awt.*;
+import java.awt.image.ImageObserver;
+import java.io.IOException;
+import java.util.ArrayList;
+
 /**
  * Represents a single player on the board.
  */
 public class Player {
-	String name;
-	int token_type;
-	int pos_of_player;
-	int money;
-	int getOutOfJail;
-	int turns_left_in_jail;
-	boolean still_in_game;
-	Property the_array[];
+	private String name;
+	private int playerPos;
+	private int money;
+	private int getOutOfJail;
+	private int turnsLeftInJail;
+	private boolean stillInGame;
+	private ArrayList<Property> properties;
+	private Sprite token;
 
-	public Player()//default constructor
-	{
-		pos_of_player=0;
+	public Player() {
+		playerPos =0;
 		money = 1000;
 		getOutOfJail = 0;
-		turns_left_in_jail=0;
-		still_in_game = true;
+		turnsLeftInJail =0;
+		stillInGame = true;
 
-		Property[] the_array = new Property[0];
+		properties = new ArrayList<>();
 	}
 
-// setter and getter for token type
-	public void set_tokenType(int token)
-		{
-			token_type = token;
-		}
-	public int get_tokenType()
-		{
-			return token_type;
-		}
+	public Player(int tokenType) throws IOException {
+		this();
+		token = new Sprite("/images/tokens/" + tokenType + ".png");
+	}
+
+	public Sprite getSprite() {
+		return token;
+	}
 
 	// setter and getter for name
 	public void set_name(String playerName)
@@ -44,15 +47,23 @@ public class Player {
 			return name;
 		}
 
-	// setter and getter for pos_of_player
-	public void set_pos_of_player(int player_pos)
+	// setter and getter for playerPos
+	public void setPlayerPos(int playerPos)
 		{
-			pos_of_player = player_pos;
+			this.playerPos = playerPos;
 		}
-	public int get_pos_of_player()
+	public int getPlayerPos()
 		{
-			return pos_of_player;
+			return playerPos;
 		}
+
+	/**
+	 * Adds the given amount to the player position.
+	 * @param amount amount to move the player
+     */
+	public void addPlayerPos(int amount) {
+		this.playerPos += amount;
+	}
 
 	/**
 	 * Sets the player's money to the given value.
@@ -91,7 +102,7 @@ public class Player {
 	}
 
 	// setter and getter for getOutOfJail
-	public void set_getOutOfJailFree(int get_out)
+	public void setGetOutOfJailFreeCardCnt(int get_out)
 		{
 			getOutOfJail = get_out;
 		}
@@ -103,28 +114,54 @@ public class Player {
 		getOutOfJail++;
 	}
 
-	public int get_getOutOfJailFree()
+	public int getGetOutOfJailFreeCards()
 		{
 			return getOutOfJail;
 		}
 
 	// setter and getter for turns left in jail
-	public void set_turns_left_in_jail(int jail_turn_left)
+	public void setTurnsLeftInJail(int turnsLeftInJail)
 		{
-			turns_left_in_jail = jail_turn_left;
+			this.turnsLeftInJail = turnsLeftInJail;
 		}
-	public int get_turns_left_in_jail()
+
+	public int getTurnsLeftInJail()
 		{
-			return turns_left_in_jail;
+			return turnsLeftInJail;
 		}
 
 	// setter and getter for still in game
-	public void set_still_in_game(boolean in_jail )
+	public void setStillInGame(boolean inJail )
 		{
-			still_in_game = in_jail;
+			stillInGame = inJail;
 		}
-	public boolean get_still_in_game()
+
+	public boolean getStillInGame()
 		{
-			return still_in_game;
+			return stillInGame;
 		}
+
+	/**
+	 * Gives the user a property.
+	 * @param property property to give the user
+     */
+	public void addProperty(Property property) {
+		properties.add(property);
+	}
+
+	/**
+	 * Takes away a property from the user.
+	 * @param property property to take from the user
+     */
+	public void removeProperty(Property property) {
+		properties.remove(property);
+	}
+
+	/**
+	 * Returns the list of owned properties
+	 * @return list of owned properties
+     */
+	public ArrayList<Property> getProperties() {
+		return properties;
+	}
 }

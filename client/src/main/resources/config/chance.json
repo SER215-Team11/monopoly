@@ -49,7 +49,7 @@
 			"script": "/scripts/poor-tax.lua"
 		},
 		{
-			"description": "Take a trip to Reading Railroad\\nIf you pass Go, collect %200",
+			"description": "Take a trip to Reading Railroad\\nIf you pass Go, collect $200",
 			"script": "/scripts/reading-railroad.lua"
 		},
 		{

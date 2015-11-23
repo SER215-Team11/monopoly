@@ -1,3 +1,3 @@
 local player = require("io.github.ser215_team11.monopoly.client.PlayerLuaLibrary")
 
-player.takeMoney(15)
+player.takeMoney(player.currPlayer(), 15)
