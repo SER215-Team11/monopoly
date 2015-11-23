@@ -3,6 +3,7 @@ package io.github.ser215_team11.monopoly.client;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferStrategy;
+import java.io.IOException;
 
 /**
  * Entry point of the client application.
@@ -52,8 +53,10 @@ public class App extends JFrame {
 
         mode = Mode.TITLE_SCREEN;
 
+        Notification.init(SCREEN_WIDTH, SCREEN_HEIGHT);
+
         titleScreen = new TitleScreen(this, SCREEN_WIDTH, SCREEN_HEIGHT);
-        gameScreen = new GameScreen();
+        gameScreen = new GameScreen(this, SCREEN_WIDTH, SCREEN_HEIGHT);
 
         // Start the main execution loop
         mainLoop();
@@ -62,7 +65,7 @@ public class App extends JFrame {
     /**
      * The main execution loop.
      */
-    private void mainLoop() throws InterruptedException {
+    private void mainLoop() throws IOException, InterruptedException {
         while(true) {
             long frameStart = System.currentTimeMillis();
 
@@ -98,7 +101,7 @@ public class App extends JFrame {
     /**
      * Draws a frame into the waiting buffer, then swaps the buffers.
      */
-    private void draw() {
+    private void draw() throws IOException {
         // Get the buffer controller
         BufferStrategy bf = getBufferStrategy();
         // Get the drawing context
@@ -113,13 +116,15 @@ public class App extends JFrame {
                 titleScreen.draw(g, this);
                 if(titleScreen.getFinished()) {
                     mode = Mode.GAME;
-                    gameScreen.setPlayerCnt(titleScreen.getPlayerCnt());
+                    gameScreen.init(titleScreen.getPlayerCnt());
                 }
                 break;
             case GAME:
                 gameScreen.draw(g, this);
                 break;
         }
+
+        Notification.draw(g, this);
 
         // Update the graphics on-screen
         bf.show();

@@ -15,6 +15,7 @@ import java.nio.file.Paths;
 import java.nio.charset.StandardCharsets;
 import java.io.IOException;
 import java.net.URI;
+import java.util.ArrayList;
 
 /**
  * Tests that all scripts in the /resources/scripts directory can be run without
@@ -38,6 +39,7 @@ public class TestScriptsRun extends TestCase {
 		Files.walk(Paths.get(Resources.path("/scripts/"))).forEach(filePath -> {
 			// Check that the "file" is actually a file and not a directory
 			if(Files.isRegularFile(filePath)) {
+				System.out.println("Testing " + filePath);
 				// Read the data from the file
 				byte[] data = {};
 				try {
@@ -49,8 +51,11 @@ public class TestScriptsRun extends TestCase {
 				String script = new String(data, StandardCharsets.UTF_8);
 
 				// Set up the Lua environment and run the script
-				Player player = new Player();
-				PlayerLuaLibrary.setTarget(player);
+				ArrayList<Player> players = new ArrayList<>();
+				for(int i=0; i<4; i++) {
+					players.add(new Player());
+				}
+				PlayerLuaLibrary.setPlayers(players);
 				Globals globals = JsePlatform.standardGlobals();
 				LuaValue chunk = globals.load(script);
 				try {

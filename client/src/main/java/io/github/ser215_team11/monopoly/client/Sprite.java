@@ -83,12 +83,11 @@ public class Sprite {
     }
 
     /**
-     * Scales the sprite by the given factors.
-     * @param wScale width factor
-     * @param hScale height factor
+     * Scales the sprite by the given factor.
+     * @param scale factor
      */
-    public void scale(double wScale, double hScale) {
-        image = ImageUtils.scale(image, wScale, hScale);
+    public void scale(double scale) {
+        image = ImageUtils.scale(image, scale, scale);
     }
 
     /**

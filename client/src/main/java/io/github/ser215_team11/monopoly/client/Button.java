@@ -172,6 +172,10 @@ public class Button implements MouseListener {
 	 * @param observer the image observer, which is "this" from the app class
      */
 	public void draw(Graphics g, ImageObserver observer) {
+		if(!active) {
+			return;
+		}
+
 		if(pressed) {
 			spritePressed.draw(g, observer);
 		} else {

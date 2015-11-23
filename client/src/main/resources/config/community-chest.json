@@ -17,11 +17,11 @@
 			"script": "/scripts/stock.lua"
 		},
 		{
-			"description": "Get Out of Jail Free\\n This card may be kept until needed or sold",
+			"description": "Get Out of Jail Free\\nThis card may be kept until needed or sold",
 			"script": "/scripts/jail-free.lua"
 		},
 		{
-			"description": "Go to Jail\\n Go directly to jail\\nDo not pass Go\\nDo not collect $200",
+			"description": "Go to Jail\\nGo directly to jail\\nDo not pass Go\\nDo not collect $200",
 			"script": "/scripts/go-to-jail.lua"
 		},
 		{

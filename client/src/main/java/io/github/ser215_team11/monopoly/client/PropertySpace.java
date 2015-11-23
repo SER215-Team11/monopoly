@@ -52,6 +52,7 @@ public class PropertySpace implements BoardSpace {
 	 */
 	public void draw(Graphics g, ImageObserver observer) {
 		sprite.draw(g, observer);
+		// TODO: Draw a border to indicate who owns this property, if anyone
 	}
 
 	/**

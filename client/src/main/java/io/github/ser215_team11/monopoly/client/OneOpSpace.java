@@ -58,7 +58,6 @@ public class OneOpSpace implements BoardSpace {
 	 * @param player the player that landed on the space
 	 */
 	public void run(Player player) {
-		PlayerLuaLibrary.setTarget(player);
 		Globals globals = JsePlatform.standardGlobals();
 		LuaValue chunk = globals.load(script);
 		chunk.call();

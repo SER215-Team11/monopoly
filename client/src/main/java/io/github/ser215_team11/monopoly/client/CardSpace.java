@@ -28,13 +28,10 @@ public class CardSpace implements BoardSpace {
 	 * Constructs a new card space with the given name and path to a config file
 	 * with card information
 	 * @param name the name of the card space, probably either "Chance" or "Community Chest"
-	 * @param imageLoc the file location of the image to draw with
-	 * @param x the x position to draw the card
-	 * @param y the y position to draw the card
 	 * @param config path to a config file with card information
 	 * @throws IOException indicates lack of resources, should bubble up to the top
 	 */
-	public CardSpace(String name, String config) throws IOException {
+	public CardSpace(String name, String config) throws IOException, FontFormatException {
 		this.name = name;
 		this.cards = parseConfig(Resources.path(config));
 
@@ -54,7 +51,7 @@ public class CardSpace implements BoardSpace {
 		}
 	}
 
-	private Card[] parseConfig(String path) throws IOException {
+	private Card[] parseConfig(String path) throws IOException, FontFormatException {
 		byte[] encoded = Files.readAllBytes(Paths.get(path));
 		String data = new String(encoded, StandardCharsets.UTF_8);
 
@@ -64,7 +61,7 @@ public class CardSpace implements BoardSpace {
 		Card[] out = new Card[jsonCards.length()];
 		for(int i=0; i<jsonCards.length(); i++) {
 			JSONObject jsonCard = jsonCards.getJSONObject(i);
-			out[i] = new Card(jsonCard.getString("description"), jsonCard.getString("script"));
+			out[i] = new Card(name, jsonCard.getString("description").replace("\\n", "\n"), jsonCard.getString("script"));
 		}
 
 		return out;
