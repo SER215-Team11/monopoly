@@ -1,5 +1,12 @@
 package io.github.ser215_team11.monopoly.client;
 
+import org.json.*;
+
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
 /**
  * A space that contains a property of some type.
  */
@@ -42,10 +49,11 @@ public class PropertySpace implements BoardSpace {
 			JSONObject parent = new JSONObject(data);
 
 			JSONArray jsonProperties = parent.getJSONArray("properties");
-			Property[] out = new Property[jsonCards.length()];
-			for(int i=0; i<jsonCards.length(); i++) {
+			Property[] out = new Property[jsonProperties.length()];
+			for(int i=0; i<jsonProperties.length(); i++) {
 				JSONObject jsonProperty = jsonProperties.getJSONObject(i);
-				out[i] = new Card(jsonProperty.getString("name"),
+				out[i] = new Property(jsonProperty.getString("name"),
+						jsonProperty.getInt("cost"),
 						jsonProperty.getInt("rent"),jsonProperty.getInt("rent1"),
 						jsonProperty.getInt("rent2"),jsonProperty.getInt("rent3"),
 						jsonProperty.getInt("rent4"),jsonProperty.getInt("rentH"),

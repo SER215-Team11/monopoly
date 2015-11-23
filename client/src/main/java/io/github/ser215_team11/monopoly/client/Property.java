@@ -8,6 +8,7 @@ public class Property {
 
 	//things a property knows
 	String name;
+	int cost;
 	int rent;
 	int rent1;
 	int rent2;
@@ -23,8 +24,9 @@ public class Property {
 	boolean mortgaged = false;
 
 	//Constructor
-	Property(String nm, int r, int r1, int r2, int r3, int r4, int rH, int m, int house, int hotel) {
+	Property(String nm, int cst, int r, int r1, int r2, int r3, int r4, int rH, int m, int house, int hotel) {
 		name = nm;
+		cost = cst;
 		rent = r;
 		rent1 = r1;
 		rent2 = r2;
@@ -72,6 +74,8 @@ public class Property {
 				return rentH;
 			}
 		}
+
+		throw new RuntimeException("could not find property rent");
 	}
 	
 	int mortgage()
