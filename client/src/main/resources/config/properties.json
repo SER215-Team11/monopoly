@@ -2,6 +2,7 @@
 	"properties": [
 		{
 			"name": "Mediterranean Ave.",
+			"cost": "60",
 			"rent": "2",
 			"rent1": "10",
 			"rent2": "30",
@@ -14,6 +15,7 @@
 		},
 		{
 			"name": "Baltic Ave.",
+			"cost": "60",
 			"rent": "4",
 			"rent1": "20",
 			"rent2": "60",
@@ -26,6 +28,7 @@
 		},
 		{
 			"name": "Oriental Ave.",
+			"cost": "100",
 			"rent": "6",
 			"rent1": "30",
 			"rent2": "60",
@@ -37,6 +40,7 @@
 			"hotelCost": "50"
 		},		{
 			"name": "Vermont Ave.",
+			"cost": "100",
 			"rent": "6",
 			"rent1": "30",
 			"rent2": "90",
@@ -49,6 +53,7 @@
 		},
 				{
 			"name": "Conneticut Ave.",
+			"cost": "120",
 			"rent": "8",
 			"rent1": "40",
 			"rent2": "100",
@@ -60,6 +65,7 @@
 			"hotelCost": "50"
 		},		{
 			"name": "St. Charles Place",
+			"cost": "140",
 			"rent": "10",
 			"rent1": "50",
 			"rent2": "150",
@@ -71,6 +77,7 @@
 			"hotelCost": "100"
 		},		{
 			"name": "States Ave.",
+			"cost": "140",
 			"rent": "10",
 			"rent1": "50",
 			"rent2": "150",
@@ -82,6 +89,7 @@
 			"hotelCost": "100"
 		},		{
 			"name": "Virginia Ave.",
+			"cost": "160",
 			"rent": "12",
 			"rent1": "60",
 			"rent2": "180",
@@ -93,6 +101,7 @@
 			"hotelCost": "100"
 		},		{
 			"name": "St. James Place",
+			"cost": "180",
 			"rent": "14",
 			"rent1": "70",
 			"rent2": "200",
@@ -104,6 +113,7 @@
 			"hotelCost": "100"
 		},		{
 			"name": "Tennessee Ave.",
+			"cost": "180",
 			"rent": "14",
 			"rent1": "70",
 			"rent2": "200",
@@ -115,6 +125,7 @@
 			"hotelCost": "100"
 		},		{
 			"name": "New York Ave.",
+			"cost": "200",
 			"rent": "16",
 			"rent1": "80",
 			"rent2": "220",
@@ -127,6 +138,7 @@
 		},
 				{
 			"name": "Kentucky Ave.",
+			"cost": "220",
 			"rent": "18",
 			"rent1": "90",
 			"rent2": "250",
@@ -138,6 +150,7 @@
 			"hotelCost": "150"
 		},		{
 			"name": "Indiana Ave.",
+			"cost": "220",
 			"rent": "18",
 			"rent1": "90",
 			"rent2": "250",
@@ -160,6 +173,7 @@
 			"hotelCost": "150"
 		},		{
 			"name": "Atlantic Ave.",
+			"cost": "260",
 			"rent": "22",
 			"rent1": "110",
 			"rent2": "330",
@@ -171,6 +185,7 @@
 			"hotelCost": "150"
 		},		{
 			"name": "Ventor Ave.",
+			"cost": "260",
 			"rent": "22",
 			"rent1": "110",
 			"rent2": "330",
@@ -182,6 +197,7 @@
 			"hotelCost": "150"
 		},		{
 			"name": "Marvin Gardens",
+			"cost": "280",
 			"rent": "24",
 			"rent1": "120",
 			"rent2": "360",
@@ -193,6 +209,7 @@
 			"hotelCost": "150"
 		},		{
 			"name": "Pacific Ave.",
+			"cost": "300",
 			"rent": "26",
 			"rent1": "130",
 			"rent2": "390",
@@ -204,6 +221,7 @@
 			"hotelCost": "200"
 		},		{
 			"name": "No. Carolina Ave.",
+			"cost": "300",
 			"rent": "26",
 			"rent1": "130",
 			"rent2": "390",
@@ -215,6 +233,7 @@
 			"hotelCost": "200"
 		},		{
 			"name": "Pennsylvania Ave.",
+			"cost": "320",
 			"rent": "28",
 			"rent1": "150",
 			"rent2": "450",
@@ -226,6 +245,7 @@
 			"hotelCost": "200"
 		},		{
 			"name": "Park Place",
+			"cost": "350",
 			"rent": "35",
 			"rent1": "175",
 			"rent2": "500",
@@ -237,6 +257,7 @@
 			"hotelCost": "200"
 		},		{
 			"name": "Boardwalk",
+			"cost": "400",
 			"rent": "50",
 			"rent1": "200",
 			"rent2": "600",
@@ -248,6 +269,7 @@
 			"hotelCost": "200"
 		},		{
 			"name": "Reading Railroad",
+			"cost": "200",
 			"rent1": "25",
 			"rent2": "50",
 			"rent3": "100",
@@ -255,6 +277,7 @@
 			"mortgage": "100"
 		},		{
 			"name": "Pennsylvania R.R.",
+			"cost": "200",
 			"rent1": "25",
 			"rent2": "50",
 			"rent3": "100",
@@ -262,6 +285,7 @@
 			"mortgage": "100"
 		},		{
 			"name": "B. & O. Railroad",
+			"cost": "200",
 			"rent1": "25",
 			"rent2": "50",
 			"rent3": "100",
@@ -269,6 +293,7 @@
 			"mortgage": "100"
 		},		{
 			"name": "Short Line R.R.",
+			"cost": "200",
 			"rent1": "25",
 			"rent2": "50",
 			"rent3": "100",
@@ -277,6 +302,7 @@
 		},
 				{
 			"name": "Reading Railroad",
+			"cost": "200",
 			"rent1": "25",
 			"rent2": "50",
 			"rent3": "100",
@@ -285,11 +311,13 @@
 		},
 				{
 			"name": "Electric Company",
+			"cost": "150",
 			"rent1": "4 * dice",
 			"rent2": "10 * dice",
 			"mortgage": "75"
 		},				{
 			"name": "Water Works",
+			"cost": "100",
 			"rent1": "4 * dice",
 			"rent2": "10 * dice",
 			"mortgage": "75"
