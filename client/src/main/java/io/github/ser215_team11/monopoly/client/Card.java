@@ -1,6 +1,9 @@
 package io.github.ser215_team11.monopoly.client;
 
-import java.util.function.Function;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 import org.luaj.vm2.Globals;
 import org.luaj.vm2.LuaValue;
@@ -18,11 +21,12 @@ public class Card {
 	 * Constructs a new card with the given description and Lua script.
 	 *
 	 * @param description a description of what the card does
-	 * @param script a Lua script that executes the card's task
+	 * @param scriptLoc a Lua script that executes the card's task
 	 */
-	public Card(String description, String script) {
+	public Card(String description, String scriptLoc) throws IOException {
 		this.description = description;
-		this.script = script;
+		byte[] encoded = Files.readAllBytes(Paths.get(Resources.path(scriptLoc)));
+		script = new String(encoded, StandardCharsets.UTF_8);
 	}
 
 	/**

@@ -1,12 +1,12 @@
 package io.github.ser215_team11.monopoly.client;
 
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.net.URL;
 import java.util.Map;
 import java.util.HashMap;
-import java.awt.Image;
 import java.io.File;
 import java.io.FileInputStream;
-import java.awt.Font;
-import java.awt.FontFormatException;
 import javax.imageio.ImageIO;
 import java.io.IOException;
 
@@ -31,8 +31,12 @@ public class Resources {
      * @param regPath path to the file relative to the resources directory
      * @return path to the actual resource
      */
-    public static String path(String regPath) {
-        return Resources.class.getResource(regPath).getPath();
+    public static String path(String regPath) throws IOException {
+        URL url = Resources.class.getResource(regPath);
+        if(url == null) {
+            throw new IOException("could not find resource " + regPath);
+        }
+        return url.getPath();
     }
 
     /**

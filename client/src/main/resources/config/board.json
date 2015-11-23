@@ -1,0 +1,175 @@
+{
+	"centerImage": "/images/spaces/center-image.png",
+	"spaces": [
+		{
+			"type": "no op",
+			"name": "Go"
+		},
+		{
+			"type": "property",
+			"name": "Mediterranean Avenue"
+		},
+		{
+			"type": "card",
+			"name": "Community Chest",
+			"config": "/config/community-chest.json"
+		},
+		{
+			"type": "property",
+			"name": "Baltic Avenue"
+		},
+		{
+			"type": "one op",
+			"name": "Income Tax",
+			"script": "/scripts/income-tax.lua"
+		},
+		{
+			"type": "railroad",
+			"name": "Reading Railroad"
+		},
+		{
+			"type": "property",
+			"name": "Oriental Avenue"
+		},
+		{
+			"type": "card",
+			"name": "Chance",
+			"config": "/config/chance.json"
+		},
+		{
+			"type": "property",
+			"name": "Vermont Avenue"
+		},
+		{
+			"type": "property",
+			"name": "Connecticut Avenue"
+		},
+		{
+			"type": "one op",
+			"name": "Jail",
+			"script": "/scripts/go-to-jail.lua"
+		},
+		{
+			"type": "property",
+			"name": "St. Charles Place"
+		},
+		{
+			"type": "utility",
+			"name": "Electric Company"
+		},
+		{
+			"type": "property",
+			"name": "States Avenue"
+		},
+		{
+			"type": "property",
+			"name": "Virginia Avenue"
+		},
+		{
+			"type": "railroad",
+			"name": "Pennsylvania Railroad"
+		},
+		{
+			"type": "property",
+			"name": "St. James Place"
+		},
+		{
+			"type": "card",
+			"name": "Community Chest",
+			"config": "/config/community-chest.json"
+		},
+		{
+			"type": "property",
+			"name": "Tennessee Avenue"
+		},
+		{
+			"type": "property",
+			"name": "New York Avenue"
+		},
+		{
+			"type": "no op",
+			"name": "Free Parking"
+		},
+		{
+			"type": "property",
+			"name": "Kentucky Avenue"
+		},
+		{
+			"type": "card",
+			"name": "Chance",
+			"config": "/config/chance.json"
+		},
+		{
+			"type": "property",
+			"name": "Indiana Avenue"
+		},
+		{
+			"type": "property",
+			"name": "Illinois Avenue"
+		},
+		{
+			"type": "railroad",
+			"name": "B. & O. Railroad"
+		},
+		{
+			"type": "property",
+			"name": "Atlantic Avenue"
+		},
+		{
+			"type": "property",
+			"name": "Ventnor Avenue"
+		},
+		{
+			"type": "utility",
+			"name": "Water Works"
+		},
+		{
+			"type": "property",
+			"name": "Marvin Gardens"
+		},
+		{
+			"type": "one op",
+			"name": "Go To Jail",
+			"script": "/scripts/go-to-jail.lua"
+		},
+		{
+			"type": "property",
+			"name": "Pacific Avenue"
+		},
+		{
+			"type": "property",
+			"name": "North Carolina Avenue"
+		},
+		{
+			"type": "card",
+			"name": "Community Chest",
+			"config": "/config/community-chest.json"
+		},
+		{
+			"type": "property",
+			"name": "Pennsylvania Avenue"
+		},
+		{
+			"type": "railroad",
+			"name": "Short Line"
+		},
+		{
+			"type": "card",
+			"name": "Chance",
+			"config": "/config/chance.json"
+		},
+		{
+			"type": "property",
+			"name": "Park Place"
+		},
+		{
+			"type": "one op",
+			"name": "Luxury Tax",
+			"script": "/scripts/luxury-tax.lua"
+		},
+		{
+			"type": "property",
+			"name": "Boardwalk"
+		}
+	]
+}

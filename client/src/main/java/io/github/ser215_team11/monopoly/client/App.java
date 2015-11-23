@@ -10,8 +10,8 @@ import java.awt.image.BufferStrategy;
 public class App extends JFrame {
 
     // Window size in pixels
-    private static final int SCREEN_WIDTH = 960;
-    private static final int SCREEN_HEIGHT = 540;
+    private static final int SCREEN_WIDTH = 800;
+    private static final int SCREEN_HEIGHT = 800;
 
     // Desired framerate
     private static final double FPS = 60.0;
@@ -19,7 +19,13 @@ public class App extends JFrame {
     // Keeps track of how many times the program failed to keep up with the desired framerate.
     private int slowCnt = 0;
 
-    private Button button;
+    private enum Mode {
+        TITLE_SCREEN, GAME
+    }
+    private Mode mode;
+
+    private TitleScreen titleScreen;
+    private GameScreen gameScreen;
 
     /**
      * Entry point of the application. Swing does not work in a static context,
@@ -44,8 +50,10 @@ public class App extends JFrame {
 		createBufferStrategy(2);
         setLayout(null);
 
-        button = new Button(300, 300, "TEST");
-        addMouseListener(button);
+        mode = Mode.TITLE_SCREEN;
+
+        titleScreen = new TitleScreen(this, SCREEN_WIDTH, SCREEN_HEIGHT);
+        gameScreen = new GameScreen();
 
         // Start the main execution loop
         mainLoop();
@@ -54,7 +62,7 @@ public class App extends JFrame {
     /**
      * The main execution loop.
      */
-    private void mainLoop() {
+    private void mainLoop() throws InterruptedException {
         while(true) {
             long frameStart = System.currentTimeMillis();
 
@@ -70,25 +78,21 @@ public class App extends JFrame {
      * all.
      * @param frameStart Time in milliseconds since the beginning of the frame
      */
-    private void limitFramerate(long frameStart) {
-        try {
-            // Calculate how long to wait for a consistent 60 frames per second
-            long delay = (long)(1000.0 * (1.0/FPS)) - (System.currentTimeMillis() - frameStart);
-            if(delay < 0) {
-                slowCnt++;
-                if(slowCnt > 60) {
-                    // Alert the user when the program consistently under-performs
-                    System.out.println("Warning: Program is running slowly");
-                    slowCnt = 0;
-                }
-
-                // The program is running behind, so execute the draw operation ASAP
-                delay = 0;
+    private void limitFramerate(long frameStart) throws InterruptedException {
+        // Calculate how long to wait for a consistent 60 frames per second
+        long delay = (long)(1000.0 * (1.0/FPS)) - (System.currentTimeMillis() - frameStart);
+        if(delay < 0) {
+            slowCnt++;
+            if (slowCnt > 60) {
+                // Alert the user when the program consistently under-performs
+                System.out.println("Warning: Program is running slowly");
+                slowCnt = 0;
             }
-            Thread.sleep(delay);
-        } catch(InterruptedException e) {
-            System.out.println(e);
+
+            // The program is running behind, so execute the draw operation ASAP
+            delay = 0;
         }
+        Thread.sleep(delay);
     }
 
     /**
@@ -104,7 +108,18 @@ public class App extends JFrame {
 		g.setColor(Color.WHITE);
 		g.fillRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
 
-        button.draw(g, this);
+        switch(mode) {
+            case TITLE_SCREEN:
+                titleScreen.draw(g, this);
+                if(titleScreen.getFinished()) {
+                    mode = Mode.GAME;
+                    gameScreen.setPlayerCnt(titleScreen.getPlayerCnt());
+                }
+                break;
+            case GAME:
+                gameScreen.draw(g, this);
+                break;
+        }
 
         // Update the graphics on-screen
         bf.show();

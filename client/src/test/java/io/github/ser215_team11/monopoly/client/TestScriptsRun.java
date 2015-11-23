@@ -6,6 +6,7 @@ import junit.framework.TestSuite;
 import junit.framework.Assert;
 
 import org.luaj.vm2.Globals;
+import org.luaj.vm2.LuaError;
 import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.lib.jse.JsePlatform;
 
@@ -52,7 +53,13 @@ public class TestScriptsRun extends TestCase {
 				PlayerLuaLibrary.setTarget(player);
 				Globals globals = JsePlatform.standardGlobals();
 				LuaValue chunk = globals.load(script);
-				chunk.call();
+				try {
+					chunk.call();
+				} catch(LuaError e) {
+					if(!(e.getCause() instanceof LuaLibrary.ScriptNotImplementedException)) {
+						throw e;
+					}
+				}
 			}
 		});
 	}

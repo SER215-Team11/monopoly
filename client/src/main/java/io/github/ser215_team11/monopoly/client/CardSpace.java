@@ -1,5 +1,7 @@
 package io.github.ser215_team11.monopoly.client;
 
+import java.awt.*;
+import java.awt.image.ImageObserver;
 import java.util.Random;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -15,20 +17,26 @@ import org.json.JSONArray;
 public class CardSpace implements BoardSpace {
 
 	private String name;
-	private Card []cards;
+
+	private Card[] cards;
 	private int drawPlace;
-	private int []drawOrder;
+	private int[] drawOrder;
+
+	private Sprite sprite;
 
 	/**
 	 * Constructs a new card space with the given name and path to a config file
 	 * with card information
-	 *
 	 * @param name the name of the card space, probably either "Chance" or "Community Chest"
+	 * @param imageLoc the file location of the image to draw with
+	 * @param x the x position to draw the card
+	 * @param y the y position to draw the card
 	 * @param config path to a config file with card information
+	 * @throws IOException indicates lack of resources, should bubble up to the top
 	 */
 	public CardSpace(String name, String config) throws IOException {
 		this.name = name;
-		this.cards = parseConfig(config);
+		this.cards = parseConfig(Resources.path(config));
 
 		this.drawPlace = 0;
 		this.drawOrder = new int[cards.length];
@@ -65,16 +73,32 @@ public class CardSpace implements BoardSpace {
 	/**
 	 * Draws a randomly selected card from the deck that has not been drawn yet.
 	 * If the deck is out of cards, it will automatically repeat the last order.
-	 *
 	 * @return the drawn card
 	 */
-	public Card draw() {
+	public Card drawCard() {
 		Card card = cards[drawOrder[drawPlace]];
 		drawPlace++;
 		if(drawPlace == drawOrder.length) {
 			drawPlace = 0;	// If we're out of cards, repeat the deck
 		}
 		return card;
+	}
+
+	public Sprite getSprite() {
+		return sprite;
+	}
+
+	public void setSprite(Sprite sprite) {
+		this.sprite = sprite;
+	}
+
+	/**
+	 * Draws the card space on screen.
+	 * @param g the graphics context
+	 * @param observer the image observer, which is "this" from the app class
+     */
+	public void draw(Graphics g, ImageObserver observer) {
+		sprite.draw(g, observer);
 	}
 
 	/**
@@ -89,7 +113,6 @@ public class CardSpace implements BoardSpace {
 
 	/**
 	 * Returns how many cards are available to the space.
-	 *
 	 * @return number of cards
 	 */
 	public int getCardCnt() {
