@@ -108,7 +108,7 @@ public class App extends JFrame {
         Graphics2D g = (Graphics2D) bf.getDrawGraphics();
 
         // Clear the screen before drawing
-		g.setColor(Color.WHITE);
+		g.setColor(new Color(205, 230, 208));
 		g.fillRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
 
         switch(mode) {

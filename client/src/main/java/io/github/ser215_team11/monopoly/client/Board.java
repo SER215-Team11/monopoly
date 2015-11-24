@@ -5,6 +5,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -27,6 +28,7 @@ public class Board {
     private double scale;
 
     private Sprite center;
+    private Sprite border;
 
     /**
      * Creates a new board instance using the given config file for filling in
@@ -115,6 +117,11 @@ public class Board {
         center.setX(x);
         center.setY(y);
 
+        int minX = 999999;
+        int minY = 999999;
+        int maxX = -999999;
+        int maxY = -999999;
+
         for(int i=0; i<spaces.length; i++) {
             Sprite sprite = spaces[i].getSprite();
             sprite.reset();
@@ -146,7 +153,30 @@ public class Board {
                 sprite.setY((int) (yD + ((iD - length * (3.0/4.0)) * wCard) - wCard));
                 sprite.rotate(4.71239);
             }
+
+            if(sprite.getX() + sprite.getWidth() > maxX) {
+                maxX = sprite.getX() + sprite.getWidth();
+            }
+            if(sprite.getY() + sprite.getHeight() > maxY) {
+                maxY = sprite.getY() + sprite.getHeight();
+            }
+            if(sprite.getX() < minX) {
+                minX = sprite.getX();
+            }
+            if(sprite.getY() < minY) {
+                minY = sprite.getY();
+            }
         }
+
+        BufferedImage borderImg = new BufferedImage(maxX - minX, maxY - minY, BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g = borderImg.createGraphics();
+        g.setColor(Color.black);
+        g.setStroke(new BasicStroke(6.0f * (float) scale));
+        g.drawRect(0, 0, maxX - minX, maxY - minY);
+        g.dispose();
+        border = new Sprite(borderImg);
+        border.setX(minX);
+        border.setY(minY);
     }
 
     /**
@@ -159,6 +189,7 @@ public class Board {
         for(BoardSpace space : spaces) {
             space.draw(g, observer);
         }
+        border.draw(g, observer);
     }
 
     /**
