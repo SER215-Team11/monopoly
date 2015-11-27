@@ -49,7 +49,8 @@ public class LuaLibrary extends TwoArgFunction {
 
         @Override
         public LuaValue call() {
-            throw new ScriptNotImplementedException();
+            System.out.println("Warning: Script not implemented");
+            return LuaValue.NIL;
         }
     }
 

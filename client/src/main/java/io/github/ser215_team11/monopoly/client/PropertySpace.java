@@ -1,23 +1,22 @@
 package io.github.ser215_team11.monopoly.client;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-
 import java.awt.*;
 import java.awt.image.ImageObserver;
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 
 /**
  * A space that contains a property of some type.
  */
 public class PropertySpace implements BoardSpace {
 
+	public enum Ownership {
+		OWNED_BY_CURRENT_PLAYER, OWNED_BY_ANOTHER_PLAYER, UNOWNED
+	}
+
 	private Property property;
 
 	private Sprite sprite;
+
+	private Ownership ownership;
 
 	/**
 	 * Constructs a new property space that refers to the given property.
@@ -32,8 +31,7 @@ public class PropertySpace implements BoardSpace {
 	 * @return property name
 	 */
 	public String getName() {
-		// TODO: Get the name from the property when it is implemented
-		return "shim";
+		return property.getName();
 	}
 
 	/**
@@ -59,7 +57,26 @@ public class PropertySpace implements BoardSpace {
 	 */
 	public void draw(Graphics g, ImageObserver observer) {
 		sprite.draw(g, observer);
-		// TODO: Draw a border to indicate who owns this property, if anyone
+		switch(ownership) {
+			case OWNED_BY_CURRENT_PLAYER:
+				g.setColor(Color.green);
+				break;
+			case OWNED_BY_ANOTHER_PLAYER:
+				g.setColor(Color.red);
+				break;
+			case UNOWNED:
+				g.setColor(new Color(0, 0, 0, 0));
+		}
+		((Graphics2D) g).setStroke(new BasicStroke(2.0f));
+		g.drawRect(sprite.getX(), sprite.getY(), sprite.getWidth(), sprite.getHeight());
+	}
+
+	/**
+	 * Sets the ownership status of the property space to the given value.
+	 * @param ownership ownership status from the point of view of the current player
+     */
+	public void setOwnership(Ownership ownership) {
+		this.ownership = ownership;
 	}
 
 	/**
@@ -67,29 +84,7 @@ public class PropertySpace implements BoardSpace {
 	 * @return property
 	 */
 	public Property getProperty() {
-			return property;
-		}
-		
-		private Property[] parseConfig(String path) throws IOException {
-			byte[] encoded = Files.readAllBytes(Paths.get(path));
-			String data = new String(encoded, StandardCharsets.UTF_8);
-
-			JSONObject parent = new JSONObject(data);
-
-			JSONArray jsonProperties = parent.getJSONArray("properties");
-			Property[] out = new Property[jsonProperties.length()];
-			for(int i=0; i<jsonProperties.length(); i++) {
-				JSONObject jsonProperty = jsonProperties.getJSONObject(i);
-				out[i] = new Property(jsonProperty.getString("name"),
-						jsonProperty.getInt("cost"),
-						jsonProperty.getInt("rent"),jsonProperty.getInt("rent1"),
-						jsonProperty.getInt("rent2"),jsonProperty.getInt("rent3"),
-						jsonProperty.getInt("rent4"),jsonProperty.getInt("rentH"),
-						jsonProperty.getInt("mortgage"),jsonProperty.getInt("houseCost"),
-						jsonProperty.getInt("hotelCost"));
-			}
-
-			return out;
-		}
+		return property;
+	}
 
 }

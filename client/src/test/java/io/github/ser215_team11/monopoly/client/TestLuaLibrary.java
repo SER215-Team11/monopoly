@@ -33,7 +33,6 @@ public class TestLuaLibrary extends TestCase {
 
         try {
             chunk.call();
-            fail("not implemented function did not raise an exception");
         } catch(LuaError e) {
             if(!(e.getCause() instanceof LuaLibrary.ScriptNotImplementedException)) {
                 throw e;

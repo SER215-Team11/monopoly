@@ -24,7 +24,7 @@
 			"script": "/scripts/income-tax.lua"
 		},
 		{
-			"type": "railroad",
+			"type": "property",
 			"name": "Reading Railroad"
 		},
 		{
@@ -54,7 +54,7 @@
 			"name": "St. Charles Place"
 		},
 		{
-			"type": "utility",
+			"type": "property",
 			"name": "Electric Company"
 		},
 		{
@@ -66,7 +66,7 @@
 			"name": "Virginia Avenue"
 		},
 		{
-			"type": "railroad",
+			"type": "property",
 			"name": "Pennsylvania Railroad"
 		},
 		{
@@ -108,7 +108,7 @@
 			"name": "Illinois Avenue"
 		},
 		{
-			"type": "railroad",
+			"type": "property",
 			"name": "B. & O. Railroad"
 		},
 		{
@@ -120,7 +120,7 @@
 			"name": "Ventnor Avenue"
 		},
 		{
-			"type": "utility",
+			"type": "property",
 			"name": "Water Works"
 		},
 		{
@@ -150,7 +150,7 @@
 			"name": "Pennsylvania Avenue"
 		},
 		{
-			"type": "railroad",
+			"type": "property",
 			"name": "Short Line"
 		},
 		{
