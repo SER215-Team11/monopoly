@@ -84,22 +84,13 @@ public class Board {
                     spaces[i] = new OneOpSpace(name, "/scripts/do-nothing.lua");
                     break;
                 case "property":
-                    // TODO: Find the property to hook up to the space when Property is implemented
-                    spaces[i] = new PropertySpace(null);
+                    spaces[i] = new PropertySpace(PropertyLoader.getProperty(name));
                     break;
                 case "card":
                     spaces[i] = new CardSpace(name, jsonSpace.getString("config"));
                     break;
                 case "one op":
                     spaces[i] = new OneOpSpace(name, jsonSpace.getString("script"));
-                    break;
-                case "railroad":
-                    // TODO: Hook up railroad when the Railroad class is implemented
-                    spaces[i] = new PropertySpace(null);
-                    break;
-                case "utility":
-                    // TODO: Hook up utility when the Utility class is implemented
-                    spaces[i] = new PropertySpace(null);
                     break;
                 default:
                     throw new RuntimeException("invalid space type \"" + type + "\" found in " + config);
@@ -184,12 +175,35 @@ public class Board {
      * @param g graphics context
      * @param observer image observer
      */
-    public void draw(Graphics g, ImageObserver observer) {
+    public void draw(Graphics g, ImageObserver observer, ArrayList<Player> players, int currPlayer) {
         center.draw(g, observer);
         for(BoardSpace space : spaces) {
+            // If the space is a property space, draw a border around it showing who owns it
+            if(space instanceof PropertySpace) {
+                PropertySpace propertySpace = (PropertySpace) space;
+                propertySpace.setOwnership(PropertySpace.Ownership.UNOWNED);
+
+                for(int i=0; i<players.size(); i++) {
+                    for(Property property : players.get(i).getProperties()) {
+                        if(property == propertySpace.getProperty()) {
+                            if(i == currPlayer) {
+                                propertySpace.setOwnership(PropertySpace.Ownership.OWNED_BY_CURRENT_PLAYER);
+                            } else {
+                                propertySpace.setOwnership(PropertySpace.Ownership.OWNED_BY_ANOTHER_PLAYER);
+                            }
+                        }
+                    }
+                }
+            }
             space.draw(g, observer);
         }
         border.draw(g, observer);
+    }
+
+    public Point getPosFromBoardPos(int boardPos) {
+        BoardSpace space = spaces[boardPos];
+        return new Point(space.getSprite().getX() - (space.getSprite().getWidth() / 2),
+                space.getSprite().getY() - (space.getSprite().getHeight() / 2));
     }
 
     /**

@@ -43,7 +43,7 @@ public class App extends JFrame {
     public App() throws Exception {
         // Basic Swing window defaults
 		setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
 		setVisible(true);
 		setResizable(false);
@@ -53,6 +53,7 @@ public class App extends JFrame {
 
         mode = Mode.TITLE_SCREEN;
 
+        PropertyLoader.init("/config/properties.json");
         Notification.init(SCREEN_WIDTH, SCREEN_HEIGHT);
 
         titleScreen = new TitleScreen(this, SCREEN_WIDTH, SCREEN_HEIGHT);
