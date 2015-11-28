@@ -3,6 +3,7 @@ package io.github.ser215_team11.monopoly.client;
 import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.lib.TwoArgFunction;
 import org.luaj.vm2.lib.ZeroArgFunction;
+import sun.font.Script;
 
 /**
  * General Lua utilities.
@@ -49,8 +50,7 @@ public class LuaLibrary extends TwoArgFunction {
 
         @Override
         public LuaValue call() {
-            System.out.println("Warning: Script not implemented");
-            return LuaValue.NIL;
+            throw new ScriptNotImplementedException();
         }
     }
 

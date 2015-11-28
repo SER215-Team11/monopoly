@@ -1,6 +1,5 @@
 package io.github.ser215_team11.monopoly.client;
 
-import junit.framework.Assert;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
@@ -33,6 +32,7 @@ public class TestLuaLibrary extends TestCase {
 
         try {
             chunk.call();
+            fail("unimplemented script failed to throw exception");
         } catch(LuaError e) {
             if(!(e.getCause() instanceof LuaLibrary.ScriptNotImplementedException)) {
                 throw e;

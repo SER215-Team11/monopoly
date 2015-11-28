@@ -36,6 +36,20 @@ public class TestScriptsRun extends TestCase {
 	 * Tests scripts for syntax errors by running them.
 	 */
 	public void testScriptsRun() throws IOException, FontFormatException {
+		// Set up the environment and run the script
+		ArrayList<Player> players = new ArrayList<>();
+		for(int i=0; i<4; i++) {
+			players.add(new Player());
+		}
+		PlayerLuaLibrary.setPlayers(players);
+
+		PropertyLoader.init("/config/properties.json");
+		try {
+			BoardLuaLibrary.setBoard(new Board(0, 0, "/config/board.json"));
+		} catch(Exception e) {
+			fail(e.getCause().getMessage());
+		}
+
 		// Loop through every script in the scripts directory
 		Files.walk(Paths.get(Resources.path("/scripts/"))).forEach(filePath -> {
 			// Check that the "file" is actually a file and not a directory
@@ -50,18 +64,6 @@ public class TestScriptsRun extends TestCase {
 					fail(e.getMessage());
 				}
 				String script = new String(data, StandardCharsets.UTF_8);
-
-				// Set up the Lua environment and run the script
-				ArrayList<Player> players = new ArrayList<>();
-				for(int i=0; i<4; i++) {
-					players.add(new Player());
-				}
-				PlayerLuaLibrary.setPlayers(players);
-				try {
-					BoardLuaLibrary.setBoard(new Board(0, 0, "/config/board.json"));
-				} catch(Exception e) {
-					fail(e.getMessage());
-				}
 				Globals globals = JsePlatform.standardGlobals();
 				LuaValue chunk = globals.load(script);
 				try {
