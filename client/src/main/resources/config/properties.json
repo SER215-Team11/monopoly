@@ -181,7 +181,7 @@
 			"hotelCost": 150
 		},
 		{
-			"name": "Ventor Avenue",
+			"name": "Ventnor Avenue",
 			"type": "property",
 			"cost": 260,
 			"color": "yellow",
@@ -217,7 +217,7 @@
 			"hotelCost": 200
 		},
 		{
-			"name": "No. Carolina Avenue",
+			"name": "North Carolina Avenue",
 			"type": "property",
 			"cost": 300,
 			"color": "green",
@@ -292,7 +292,7 @@
 			"mortgage": 100
 		},
 		{
-			"name": "Short Line Railroad",
+			"name": "Short Line",
 			"type": "railroad",
 			"cost": 200,
 			"rents": [

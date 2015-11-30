@@ -50,6 +50,8 @@ public class TestScriptsRun extends TestCase {
 			fail(e.getCause().getMessage());
 		}
 
+		Notification.init(300, 300);
+
 		// Loop through every script in the scripts directory
 		Files.walk(Paths.get(Resources.path("/scripts/"))).forEach(filePath -> {
 			// Check that the "file" is actually a file and not a directory
