@@ -1,6 +1,7 @@
 package io.github.ser215_team11.monopoly.client;
 
 import org.luaj.vm2.LuaValue;
+import org.luaj.vm2.lib.OneArgFunction;
 import org.luaj.vm2.lib.TwoArgFunction;
 import org.luaj.vm2.lib.ZeroArgFunction;
 import sun.font.Script;
@@ -36,6 +37,7 @@ public class LuaLibrary extends TwoArgFunction {
 
         // Make functions available to Lua
         library.set("notImplemented", new NotImplementedFunction());
+        library.set("notify", new NotifyFunction());
 
         return library;
     }
@@ -51,6 +53,22 @@ public class LuaLibrary extends TwoArgFunction {
         @Override
         public LuaValue call() {
             throw new ScriptNotImplementedException();
+        }
+    }
+
+    /**
+     * Implements a function that makes notifications.
+     */
+    static class NotifyFunction extends OneArgFunction {
+        public NotifyFunction() {
+
+        }
+
+        @Override
+        public LuaValue call(LuaValue message) {
+            String messageStr = message.checkstring().checkjstring();
+            Notification.notify(messageStr);
+            return LuaValue.NIL;
         }
     }
 

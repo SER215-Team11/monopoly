@@ -19,6 +19,7 @@ public class GameScreen {
     private int moveAmount;
     private long lastMove;
     private int lastRoll;
+    private int delayToZoom;
 
     private int screenWidth;
     private int screenHeight;
@@ -29,6 +30,10 @@ public class GameScreen {
     private Button auctionButton;
     private Button continueButton;
     private Button payRentButton;
+
+    private boolean showDie;
+    private Die die1;
+    private Die die2;
 
     private Hud hud;
 
@@ -86,6 +91,13 @@ public class GameScreen {
         payRentButton.setY(((screenHeight*3) / 4) - (continueButton.getHeight() / 2));
         payRentButton.setActive(false);
         parent.addMouseListener(payRentButton);
+
+        die1 = new Die();
+        die1.setX((screenWidth / 2) - die1.getWidth() - 10);
+        die1.setY((screenHeight / 2) - (die1.getHeight() / 2));
+        die2 = new Die();
+        die2.setX(die1.getX() + die2.getWidth() + 10);
+        die2.setY(die1.getY());
     }
 
     /**
@@ -131,18 +143,37 @@ public class GameScreen {
     private void roll() {
         // Roll the dice
         Random random = new Random();
-        int amount = (random.nextInt(6) + 1) + (random.nextInt(6) + 1);
-        lastRoll = amount;
+        int amount1 = (random.nextInt(6) + 1);
+        int amount2 = (random.nextInt(6) + 1);
+        lastRoll = amount1 + amount2;
 
-        // Set the player ready to move
-        moveAmount = amount;
-        Notification.notify("Player " + (currPlayer + 1) + " rolled " + amount + "!");
+        die1.setNum(amount1);
+        die2.setNum(amount2);
+        showDie = true;
+        rollButton.setActive(false);
+
+        // Check if the player is in jail
+        if(players.get(currPlayer).getTurnsLeftInJail() == 0) {
+            // Set the player ready to move
+            moveAmount = amount1 + amount2;
+        } else {
+            if(amount1 == amount2) {
+                // Release the player if they rolled doubles
+                players.get(currPlayer).setTurnsLeftInJail(0);
+                Notification.notify("Player " + (currPlayer + 1) + " was release from jail!");
+                moveAmount = amount1 + amount2;
+            } else {
+                players.get(currPlayer).decTurnsLeftInJail();
+                delayToZoom = 500;
+            }
+        }
     }
 
     /**
      * Does the required tasks of the space the current player is on.
      */
     private void processSpace() {
+        showDie = false;
         board.zoomPlayer(players.get(currPlayer), screenWidth, screenHeight);
 
         // Add menu options based on what space was hit
@@ -151,7 +182,6 @@ public class GameScreen {
             // The user is on a card space
             CardSpace cardSpace = (CardSpace) space;
             drawCardButton.setActive(true);
-            rollButton.setActive(false);
 
             // Show the user the card and apply the effects
             drawCardButton.setRunnable(() -> {
@@ -174,7 +204,6 @@ public class GameScreen {
             PropertySpace propertySpace = (PropertySpace) space;
 
             Player owner = getOwner(propertySpace.getProperty());
-            rollButton.setActive(false);
             if(owner == null) {
                 purchaseButton.setActive(true);
                 auctionButton.setActive(true);
@@ -220,7 +249,6 @@ public class GameScreen {
             // The user is on a one-op space. This also includes spaces that do nothing, like free parking.
             OneOpSpace oneOpSpace = (OneOpSpace) space;
             continueButton.setActive(true);
-            rollButton.setActive(false);
 
             // Run whatever event is appropriate, if any
             continueButton.setRunnable(() -> {
@@ -279,13 +307,20 @@ public class GameScreen {
         board.drawPlayers(players, g, observer);
         // Move the current player every half a second
         if(moveAmount > 0 && System.currentTimeMillis() - lastMove > 500) {
-            players.get(currPlayer).addPlayerPos(1);
+            players.get(currPlayer).setPlayerPos(board.fixBoardPos(players.get(currPlayer).getPlayerPos() + 1));
             moveAmount--;
             if(moveAmount == 0) {
-                // Process the player's current space if they have reached their destination
-                processSpace();
+                delayToZoom = 60;
             }
             lastMove = System.currentTimeMillis();
+        }
+
+        if(delayToZoom > 0) {
+            delayToZoom--;
+            if(delayToZoom == 0) {
+                // Process the player's current space
+                processSpace();
+            }
         }
 
         rollButton.draw(g, observer);
@@ -294,6 +329,11 @@ public class GameScreen {
         auctionButton.draw(g, observer);
         continueButton.draw(g, observer);
         payRentButton.draw(g, observer);
+
+        if(showDie) {
+            die1.draw(g, observer);
+            die2.draw(g, observer);
+        }
 
         hud.draw(g, observer);
 

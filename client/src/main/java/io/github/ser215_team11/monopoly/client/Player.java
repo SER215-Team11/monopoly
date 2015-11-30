@@ -130,6 +130,13 @@ public class Player {
 			return turnsLeftInJail;
 		}
 
+	/**
+	 * Decrements the turns left in jail by one.
+	 */
+	public void decTurnsLeftInJail() {
+		turnsLeftInJail--;
+	}
+
 	// setter and getter for still in game
 	public void setStillInGame(boolean inJail )
 		{

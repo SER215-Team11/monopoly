@@ -3,6 +3,7 @@ package io.github.ser215_team11.monopoly.client;
 import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.lib.OneArgFunction;
 import org.luaj.vm2.lib.TwoArgFunction;
+import org.luaj.vm2.lib.ZeroArgFunction;
 
 /**
  * Allows Lua scripts to interact with the board.
@@ -31,6 +32,8 @@ public class BoardLuaLibrary extends TwoArgFunction {
 
         // Make functions available to Lua
         library.set("fixBoardPos", new FixBoardPosFunction());
+        library.set("getJailSpace", new GetJailSpaceFunction());
+        library.set("getBoardSpace", new GetBoardSpaceFunction());
 
         return library;
     }
@@ -50,4 +53,29 @@ public class BoardLuaLibrary extends TwoArgFunction {
         }
     }
 
+    /**
+     * Implements a function that returns the jail space position.
+     */
+    static class GetJailSpaceFunction extends ZeroArgFunction {
+        public GetJailSpaceFunction() {
+
+        }
+
+        @Override
+        public LuaValue call() {
+            return LuaValue.valueOf(board.getJailSpace());
+        }
+    }
+
+
+    static class GetBoardSpaceFunction extends OneArgFunction {
+        public GetBoardSpaceFunction() {
+
+        }
+
+        @Override
+        public LuaValue call(LuaValue name) {
+            return LuaValue.valueOf(board.getBoardPos(name.checkjstring()));
+        }
+    }
 }

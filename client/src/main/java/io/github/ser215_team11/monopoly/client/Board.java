@@ -27,6 +27,8 @@ public class Board {
     private int origY;
     private double scale;
 
+    private int jailSpace;
+
     private Sprite center;
     private Sprite border;
 
@@ -84,13 +86,21 @@ public class Board {
                     spaces[i] = new OneOpSpace(name, "/scripts/do-nothing.lua");
                     break;
                 case "property":
-                    spaces[i] = new PropertySpace(PropertyLoader.getProperty(name));
+                    Property property = PropertyLoader.getProperty(name);
+                    if(property == null) {
+                        throw new RuntimeException("could not find property information for property space " + name);
+                    }
+                    spaces[i] = new PropertySpace(property);
                     break;
                 case "card":
                     spaces[i] = new CardSpace(name, jsonSpace.getString("config"));
                     break;
                 case "one op":
                     spaces[i] = new OneOpSpace(name, jsonSpace.getString("script"));
+                    break;
+                case "jail":
+                    spaces[i] = new OneOpSpace(name, jsonSpace.getString("script"));
+                    jailSpace = i;
                     break;
                 default:
                     throw new RuntimeException("invalid space type \"" + type + "\" found in " + config);
@@ -100,6 +110,10 @@ public class Board {
         }
 
         constructBoard();
+    }
+
+    public int getJailSpace() {
+        return jailSpace;
     }
 
     public void constructBoard() {
@@ -178,8 +192,9 @@ public class Board {
     public void draw(Graphics g, ImageObserver observer, ArrayList<Player> players, int currPlayer) {
         center.draw(g, observer);
         for(BoardSpace space : spaces) {
-            // If the space is a property space, draw a border around it showing who owns it
+            // If the space is a property space, mark it in a way depending on who owns it
             if(space instanceof PropertySpace) {
+                // Check who owns each property
                 PropertySpace propertySpace = (PropertySpace) space;
                 propertySpace.setOwnership(PropertySpace.Ownership.UNOWNED);
 
@@ -198,12 +213,6 @@ public class Board {
             space.draw(g, observer);
         }
         border.draw(g, observer);
-    }
-
-    public Point getPosFromBoardPos(int boardPos) {
-        BoardSpace space = spaces[boardPos];
-        return new Point(space.getSprite().getX() - (space.getSprite().getWidth() / 2),
-                space.getSprite().getY() - (space.getSprite().getHeight() / 2));
     }
 
     /**
@@ -308,6 +317,20 @@ public class Board {
         }
     }
 
+    /**
+     * Returns the position of the named board space.
+     * @param name board space name
+     * @return position of space
+     */
+    public int getBoardPos(String name) {
+        for(int i=0; i<spaces.length; i++) {
+            if(spaces[i].getName().equals(name)) {
+                return i;
+            }
+        }
+
+        return -1;
+    }
 
     public void zoomPlayer(Player player, int screenWidth, int screenHeight) {
         BoardSpace space = spaces[player.getPlayerPos()];

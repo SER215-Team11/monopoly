@@ -45,9 +45,9 @@
 			"name": "Connecticut Avenue"
 		},
 		{
-			"type": "one op",
+			"type": "jail",
 			"name": "Jail",
-			"script": "/scripts/go-to-jail.lua"
+			"script": "/scripts/do-nothing.lua"
 		},
 		{
 			"type": "property",
