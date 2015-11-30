@@ -14,7 +14,6 @@ rr = {board.getBoardSpace("B. & O. Railroad") - lastPos,
 nearest = 99999
 nearestPos = -1
 for i=1,4 do
-    print(rr[i])
     if rr[i] > 0 and rr[i] < nearest then
         nearest = rr[i]
         nearestPos = i
@@ -22,7 +21,6 @@ for i=1,4 do
 end
 
 if nearestPos == -1 then
-    print(-rr[i])
     for i=1,4 do
         if (-rr[i]) < nearest then
             nearest = -rr[i]
