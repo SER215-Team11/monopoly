@@ -13,15 +13,15 @@
 			"script": "/scripts/st-charles-place.lua"
 		},
 		{
-			"description": "Advance token to nearest Utility. If unowned, you may buy it from the Bank. If owned, throw dice and pay owner a total ten times the amount thrown.",
+			"description": "Advance token to nearest Utility.\\nIf unowned, you may buy it from the Bank.\\nIf owned, throw dice and pay owner a total ten\\ntimes the amount thrown.",
 			"script": "/scripts/nearest-utility.lua"
 		},
 		{
-			"description": "Advance token to the nearest Railroad and pay owner twice the rental to which he/she is otherwise entitled. If railroad is unowned, you may buy it from the Bank.",
+			"description": "Advance token to the nearest Railroad\\nand pay owner twice the rental to which he/she is\\notherwise entitled. If railroad is unowned, you may buy it\\nfrom the Bank.",
 			"script": "/scripts/nearest-railroad.lua"
 		},
 		{
-			"description": "Advance token to the nearest Railroad and pay owner twice the rental to which he/she is otherwise entitled. If railroad is unowned, you may buy it from the Bank.",
+			"description": "Advance token to the nearest Railroad\\nand pay owner twice the rental to which he/she is\\notherwise entitled. If railroad is unowned, you may buy it\\nfrom the Bank.",
 			"script": "/scripts/nearest-railroad.lua"
 		},
 		{
@@ -29,7 +29,7 @@
 			"script": "/scripts/bank-dividend.lua"
 		},
 		{
-			"description": "Get Out of Jail Free\\n This card may be kept until needed or sold",
+			"description": "Get Out of Jail Free\\n This card may be kept until needed\\nor sold",
 			"script": "/scripts/jail-free.lua"
 		},
 		{
