@@ -36,7 +36,9 @@ public class Resources {
         if(url == null) {
             throw new IOException("could not find resource " + regPath);
         }
-        return url.getPath();
+        String osAppropriatePath = System.getProperty( "os.name" ).contains( "indow" ) ? url.getPath().substring(1) : url.getPath();
+        
+        return osAppropriatePath;
     }
 
     /**
