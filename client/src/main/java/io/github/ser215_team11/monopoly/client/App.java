@@ -66,7 +66,7 @@ public class App extends JFrame {
     /**
      * The main execution loop.
      */
-    private void mainLoop() throws IOException, InterruptedException {
+    private void mainLoop() throws IOException, FontFormatException, InterruptedException {
         while(true) {
             long frameStart = System.currentTimeMillis();
 
@@ -102,7 +102,7 @@ public class App extends JFrame {
     /**
      * Draws a frame into the waiting buffer, then swaps the buffers.
      */
-    private void draw() throws IOException {
+    private void draw() throws IOException, FontFormatException {
         // Get the buffer controller
         BufferStrategy bf = getBufferStrategy();
         // Get the drawing context
@@ -117,7 +117,7 @@ public class App extends JFrame {
                 titleScreen.draw(g, this);
                 if(titleScreen.getFinished()) {
                     mode = Mode.GAME;
-                    gameScreen.init(titleScreen.getPlayerCnt());
+                    gameScreen.init(titleScreen.getPlayerCnt(), this);
                 }
                 break;
             case GAME:

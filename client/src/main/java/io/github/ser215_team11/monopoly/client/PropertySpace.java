@@ -1,12 +1,14 @@
 package io.github.ser215_team11.monopoly.client;
 
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.image.ImageObserver;
 
 /**
  * A space that contains a property of some type.
  */
-public class PropertySpace implements BoardSpace {
+public class PropertySpace implements BoardSpace, MouseListener {
 
 	public enum Ownership {
 		OWNED_BY_CURRENT_PLAYER, OWNED_BY_ANOTHER_PLAYER, UNOWNED
@@ -85,6 +87,32 @@ public class PropertySpace implements BoardSpace {
 	 */
 	public Property getProperty() {
 		return property;
+	}
+
+	public void mousePressed(MouseEvent e) {
+
+	}
+
+	public void mouseReleased(MouseEvent e) {
+
+	}
+
+	public void mouseClicked(MouseEvent e) {
+		int x = (int) e.getPoint().getX();
+		int y = (int) e.getPoint().getY();
+		// Check if the click was within the space
+		if(x > sprite.getX() && y > sprite.getY() &&
+				x < sprite.getX() + sprite.getWidth() && y < sprite.getY() + sprite.getHeight()) {
+			PropertyOpMenu.setProperty(property);
+		}
+	}
+
+	public void mouseEntered(MouseEvent e) {
+
+	}
+
+	public void mouseExited(MouseEvent e) {
+
 	}
 
 }

@@ -1,16 +1,16 @@
 package io.github.ser215_team11.monopoly.client;
 
+import org.apache.commons.io.IOUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -35,10 +35,13 @@ public class Board {
     /**
      * Creates a new board instance using the given config file for filling in
      * spaces. There should only be one of these.
+     * @param x the x position of the board
+     * @param y the y position of the board
      * @param config file where board and space information is stored
+     * @param parentFrame the parent JFrame for user input
      * @throws IOException, FontFormatException lack of resources, this should bubble to the top
      */
-    public Board(int x, int y, String config) throws IOException, FontFormatException {
+    public Board(int x, int y, String config, JFrame parentFrame) throws IOException, FontFormatException {
         this.x = x;
         this.origX = x;
         this.y = y;
@@ -46,7 +49,7 @@ public class Board {
         this.scale = ZOOM_OUT_SCALE;
 
         // Open the config file
-        byte[] encoded = Files.readAllBytes(Paths.get(Resources.path(config)));
+        byte[] encoded = IOUtils.toByteArray(Resources.stream(config));
         String data = new String(encoded, StandardCharsets.UTF_8);
 
         // Start parsing JSON
@@ -91,6 +94,7 @@ public class Board {
                         throw new RuntimeException("could not find property information for property space " + name);
                     }
                     spaces[i] = new PropertySpace(property);
+                    parentFrame.addMouseListener((PropertySpace) spaces[i]);
                     break;
                 case "card":
                     spaces[i] = new CardSpace(name, jsonSpace.getString("config"));

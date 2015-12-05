@@ -1,5 +1,6 @@
 package io.github.ser215_team11.monopoly.client;
 
+import org.apache.commons.io.IOUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -7,6 +8,7 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -23,7 +25,7 @@ public class PropertyLoader {
      * @throws IOException config file was not found
      */
     public static void init(String configLoc) throws IOException {
-        byte[] encoded = Files.readAllBytes(Paths.get(Resources.path(configLoc)));
+        byte[] encoded = IOUtils.toByteArray(Resources.stream(configLoc));
         String data = new String(encoded, StandardCharsets.UTF_8);
 
         JSONObject parent = new JSONObject(data);
@@ -98,6 +100,31 @@ public class PropertyLoader {
      */
     public static Property getProperty(String name) {
         return properties.get(name);
+    }
+
+    public static boolean hasMonopoly(Player player, String color) {
+        int colorCnt = 0;
+        for(Property p : properties.values()) {
+            if(p instanceof  StandardProperty) {
+                StandardProperty standard = (StandardProperty) p;
+                if(standard.getColor().equals(color)) {
+                    colorCnt++;
+                }
+            }
+        }
+
+        int ownedColorCnt = 0;
+        ArrayList<Property> playerProps = player.getProperties();
+        for(Property p : playerProps) {
+            if(p instanceof StandardProperty) {
+                StandardProperty standard = (StandardProperty) p;
+                if(standard.getColor().equals(color)) {
+                    ownedColorCnt++;
+                }
+            }
+        }
+
+        return ownedColorCnt == colorCnt;
     }
 
 }

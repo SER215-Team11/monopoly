@@ -7,6 +7,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
+import org.apache.commons.io.IOUtils;
 import org.luaj.vm2.Buffer;
 import org.luaj.vm2.Globals;
 import org.luaj.vm2.LuaValue;
@@ -29,7 +30,7 @@ public class Card {
 	 */
 	public Card(String deckName, String description, String scriptLoc) throws IOException, FontFormatException {
 		this.description = description;
-		byte[] encoded = Files.readAllBytes(Paths.get(Resources.path(scriptLoc)));
+		byte[] encoded = IOUtils.toByteArray(Resources.stream(scriptLoc));
 		script = new String(encoded, StandardCharsets.UTF_8);
 
 		BufferedImage image = new BufferedImage(300, 200, BufferedImage.TYPE_INT_ARGB);
@@ -37,7 +38,7 @@ public class Card {
 		g.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 		g.setFont(Resources.getFont("/fonts/impact.ttf").deriveFont(24.0f));
 		g.drawImage(Resources.getImage("/images/card.png"), 0, 0, null);
-		g.setColor(Color.black);
+		g.setColor(Color.white);
 		g.drawString(deckName, 20, 30);
 		g.setFont(Resources.getFont("/fonts/roboto-bold.ttf").deriveFont(14.0f));
 		drawString(g, description, 10, 50);

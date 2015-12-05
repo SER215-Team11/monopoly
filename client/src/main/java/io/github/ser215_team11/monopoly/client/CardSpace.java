@@ -8,6 +8,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.charset.StandardCharsets;
 
+import org.apache.commons.io.IOUtils;
 import org.json.JSONObject;
 import org.json.JSONArray;
 
@@ -33,7 +34,7 @@ public class CardSpace implements BoardSpace {
 	 */
 	public CardSpace(String name, String config) throws IOException, FontFormatException {
 		this.name = name;
-		this.cards = parseConfig(Resources.path(config));
+		this.cards = parseConfig(config);
 
 		this.drawPlace = 0;
 		this.drawOrder = new int[cards.length];
@@ -52,7 +53,7 @@ public class CardSpace implements BoardSpace {
 	}
 
 	private Card[] parseConfig(String path) throws IOException, FontFormatException {
-		byte[] encoded = Files.readAllBytes(Paths.get(path));
+		byte[] encoded = IOUtils.toByteArray(Resources.stream(path));
 		String data = new String(encoded, StandardCharsets.UTF_8);
 
 		JSONObject parent = new JSONObject(data);

@@ -1,5 +1,6 @@
 package io.github.ser215_team11.monopoly.client;
 
+import org.apache.commons.io.IOUtils;
 import org.luaj.vm2.Globals;
 import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.lib.jse.JsePlatform;
@@ -24,7 +25,7 @@ public class OneOpSpace implements BoardSpace {
 
 	public OneOpSpace(String name, String scriptLoc) throws IOException {
 		this.name = name;
-		byte[] encoded = Files.readAllBytes(Paths.get(Resources.path(scriptLoc)));
+		byte[] encoded = IOUtils.toByteArray(Resources.stream(scriptLoc));
 		script = new String(encoded, StandardCharsets.UTF_8);
 	}
 
