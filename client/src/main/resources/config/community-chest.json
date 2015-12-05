@@ -61,7 +61,7 @@
 			"script": "/scripts/street-repairs.lua"
 		},
 		{
-			"description": "You have won second prize in a beauty contest\\nCollect $10",
+			"description": "You have won second prize in a beauty\\ncontest. Collect $10",
 			"script": "/scripts/beauty-contest.lua"
 		},
 		{

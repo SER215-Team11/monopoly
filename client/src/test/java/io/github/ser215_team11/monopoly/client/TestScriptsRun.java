@@ -10,6 +10,7 @@ import org.luaj.vm2.LuaError;
 import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.lib.jse.JsePlatform;
 
+import javax.swing.*;
 import java.awt.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -45,7 +46,7 @@ public class TestScriptsRun extends TestCase {
 
 		PropertyLoader.init("/config/properties.json");
 		try {
-			BoardLuaLibrary.setBoard(new Board(0, 0, "/config/board.json"));
+			BoardLuaLibrary.setBoard(new Board(0, 0, "/config/board.json", new JFrame()));
 		} catch(Exception e) {
 			fail(e.getCause().getMessage());
 		}

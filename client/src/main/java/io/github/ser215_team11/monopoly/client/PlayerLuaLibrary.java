@@ -173,8 +173,16 @@ public class PlayerLuaLibrary extends TwoArgFunction {
 
 		@Override
 		public LuaValue call(LuaValue player) {
-			// TODO: Count the player's total houses when the properties class is implemented
-			return LuaValue.valueOf(3);
+			int cnt = 0;
+			for(Property property : players.get(player.checkint()).getProperties()) {
+				if(property instanceof StandardProperty) {
+					StandardProperty standard = (StandardProperty) property;
+					if(standard.getNumUpgrades() != 5) {
+						cnt += standard.getNumUpgrades();
+					}
+				}
+			}
+			return LuaValue.valueOf(cnt);
 		}
 	}
 
@@ -187,8 +195,16 @@ public class PlayerLuaLibrary extends TwoArgFunction {
 
 		@Override
 		public LuaValue call(LuaValue player) {
-			// TODO: Count the player's total hotels when the properties class is implemented
-			return LuaValue.valueOf(5);
+			int cnt = 0;
+			for(Property property : players.get(player.checkint()).getProperties()) {
+				if(property instanceof StandardProperty) {
+					StandardProperty standard = (StandardProperty) property;
+					if(standard.getNumUpgrades() == 5) {
+						cnt++;
+					}
+				}
+			}
+			return LuaValue.valueOf(cnt);
 		}
 	}
 

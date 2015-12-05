@@ -34,6 +34,7 @@ public class GameScreen {
     private boolean showDie;
     private Die die1;
     private Die die2;
+    private boolean repeatTurn;
 
     private Hud hud;
 
@@ -43,7 +44,7 @@ public class GameScreen {
         this.screenWidth = screenWidth;
         this.screenHeight = screenHeight;
 
-        board = new Board(140, 140, "/config/board.json");
+        board = new Board(140, 140, "/config/board.json", parent);
         BoardLuaLibrary.setBoard(board);
         players = new ArrayList<>();
 
@@ -72,7 +73,7 @@ public class GameScreen {
         parent.addMouseListener(purchaseButton);
 
         // Create the auction button
-        auctionButton = new Button("Auction");
+        auctionButton = new Button("Pass");
         auctionButton.setX(((screenWidth * 2) / 3) - (auctionButton.getWidth() / 2));
         auctionButton.setY(((screenHeight*3) / 4) - (auctionButton.getHeight() / 2));
         auctionButton.setActive(false);
@@ -103,9 +104,10 @@ public class GameScreen {
     /**
      * Initialize the game screen to be ready to display and take input.
      * @param playerCnt the amount of players playing
+     * @param parent the parent JFrame for user input
      * @throws IOException lack of resources. This should bubble up to the top
      */
-    public void init(int playerCnt) throws IOException {
+    public void init(int playerCnt, JFrame parent) throws IOException, FontFormatException {
         ArrayList<Integer> chosenTokens = new ArrayList<>();
         Random random = new Random();
         // Create all the players
@@ -130,9 +132,13 @@ public class GameScreen {
         currPlayer = 0;
         PlayerLuaLibrary.setPlayers(players);
         PlayerLuaLibrary.setCurrPlayer(currPlayer);
+        PropertyOpMenu.setPlayer(players.get(currPlayer));
         hud.setCurrPlayer(players.get(currPlayer), currPlayer + 1);
 
         rollButton.setActive(true);
+
+        PropertyOpMenu.init(screenWidth, screenHeight, parent);
+        PropertyOpMenu.setActive(true);
 
         Notification.notify("Welcome to Monopoly!");
     }
@@ -156,17 +162,23 @@ public class GameScreen {
         if(players.get(currPlayer).getTurnsLeftInJail() == 0) {
             // Set the player ready to move
             moveAmount = amount1 + amount2;
+            if(amount1 == amount2) {
+                repeatTurn = true;
+            }
         } else {
             if(amount1 == amount2) {
                 // Release the player if they rolled doubles
                 players.get(currPlayer).setTurnsLeftInJail(0);
-                Notification.notify("Player " + (currPlayer + 1) + " was release from jail!");
+                Notification.notify("Player " + (currPlayer + 1) + " was released from jail!");
                 moveAmount = amount1 + amount2;
             } else {
                 players.get(currPlayer).decTurnsLeftInJail();
-                delayToZoom = 500;
+                Notification.notify(players.get(currPlayer).getTurnsLeftInJail() + " turns left in jail!");
+                delayToZoom = 100;
             }
         }
+
+        PropertyOpMenu.setActive(false);
     }
 
     /**
@@ -175,6 +187,7 @@ public class GameScreen {
     private void processSpace() {
         showDie = false;
         board.zoomPlayer(players.get(currPlayer), screenWidth, screenHeight);
+        PropertyOpMenu.setActive(false);
 
         // Add menu options based on what space was hit
         BoardSpace space = board.getBoardSpace(players.get(currPlayer));
@@ -232,18 +245,30 @@ public class GameScreen {
                     turnOver();
                 });
             } else {
-                payRentButton.setActive(true);
+                if(owner == players.get(currPlayer) || propertySpace.getProperty().getMortgaged()) {
+                    // Don't charge rent on the property if the owner is the current player or the property is mortgaged
+                    continueButton.setActive(true);
 
-                payRentButton.setRunnable(() -> {
-                    int rent = propertySpace.getProperty().getRent(owner, lastRoll);
-                    players.get(currPlayer).takeMoney(rent);
-                    owner.giveMoney(rent);
+                    continueButton.setRunnable(() -> {
+                        resetButtons();
+                        rollButton.setActive(true);
+                        board.zoomOut();
+                        turnOver();
+                    });
+                } else {
+                    payRentButton.setActive(true);
 
-                    resetButtons();
-                    rollButton.setActive(true);
-                    board.zoomOut();
-                    turnOver();
-                });
+                    payRentButton.setRunnable(() -> {
+                        int rent = propertySpace.getProperty().getRent(owner, lastRoll);
+                        players.get(currPlayer).takeMoney(rent);
+                        owner.giveMoney(rent);
+
+                        resetButtons();
+                        rollButton.setActive(true);
+                        board.zoomOut();
+                        turnOver();
+                    });
+                }
             }
         } else if(space instanceof OneOpSpace) {
             // The user is on a one-op space. This also includes spaces that do nothing, like free parking.
@@ -289,12 +314,21 @@ public class GameScreen {
      * Pass the turn off to the next player.
      */
     private void turnOver() {
-        currPlayer++;
-        if(currPlayer >= players.size()) {
-            currPlayer = 0;
-        }
+        do {
+            if (!repeatTurn) {
+                currPlayer++;
+                if (currPlayer >= players.size()) {
+                    currPlayer = 0;
+                }
+            } else {
+                repeatTurn = false;
+            }
+        } while(!players.get(currPlayer).getStillInGame());
         PlayerLuaLibrary.setCurrPlayer(currPlayer);
         hud.setCurrPlayer(players.get(currPlayer), currPlayer + 1);
+        PropertyOpMenu.setPlayer(players.get(currPlayer));
+
+        PropertyOpMenu.setActive(true);
     }
 
     /**
@@ -308,6 +342,10 @@ public class GameScreen {
         // Move the current player every half a second
         if(moveAmount > 0 && System.currentTimeMillis() - lastMove > 500) {
             players.get(currPlayer).setPlayerPos(board.fixBoardPos(players.get(currPlayer).getPlayerPos() + 1));
+            if(players.get(currPlayer).getPlayerPos() == 0) {
+                // The player passed Go
+                players.get(currPlayer).giveMoney(200);
+            }
             moveAmount--;
             if(moveAmount == 0) {
                 delayToZoom = 60;
@@ -336,6 +374,7 @@ public class GameScreen {
         }
 
         hud.draw(g, observer);
+        PropertyOpMenu.draw(g, observer);
 
         if(currCard != null) {
             currCard.getSprite().draw(g, observer);

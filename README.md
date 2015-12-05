@@ -13,3 +13,8 @@ To run the client, go into the client directory and run the following.
 ```
 mvn exec:java -Dexec.mainClass=io.github.ser215_team11.monopoly.client.App
 ```
+
+To create a self-contained jar file, run the following in the client directory. The result will be in the target directory.
+```
+mvn package
+```

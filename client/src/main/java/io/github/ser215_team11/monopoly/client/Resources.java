@@ -2,6 +2,7 @@ package io.github.ser215_team11.monopoly.client;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.InputStream;
 import java.net.URL;
 import java.util.Map;
 import java.util.HashMap;
@@ -41,6 +42,10 @@ public class Resources {
         return osAppropriatePath;
     }
 
+    public static InputStream stream(String regPath) throws IOException {
+        return Resources.class.getResourceAsStream(regPath);
+    }
+
     /**
      * Loads and caches an image from the given file path. The path does not
      * need to be passed through Resources.path(). If the image has already been
@@ -54,7 +59,7 @@ public class Resources {
             return imageCache.get(regPath);
         }
 
-        imageCache.put(regPath, ImageIO.read(new File(Resources.path(regPath))));
+        imageCache.put(regPath, ImageIO.read(stream(regPath)));
         return imageCache.get(regPath);
     }
 
@@ -71,7 +76,7 @@ public class Resources {
             return fontCache.get(regPath);
         }
 
-        fontCache.put(regPath, Font.createFont(Font.TRUETYPE_FONT, new FileInputStream(Resources.path(regPath))));
+        fontCache.put(regPath, Font.createFont(Font.TRUETYPE_FONT, stream(regPath)));
         return fontCache.get(regPath);
     }
 
