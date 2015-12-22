@@ -23,20 +23,6 @@ import java.util.ArrayList;
  */
 public class TestScriptsRun extends TestCase {
 
-	/**
-	 * Actual JFrames require a window manager when being interacted with.
-	 * This mocks the methods that we need for testing that would normally fail
-	 * on a system without a window manager.
-	 */
-	private class MockJFrame extends JFrame {
-		public MockJFrame() {
-		}
-
-		@Override
-		public void addMouseListener(MouseListener listener) {
-		}
-	}
-
 	public TestScriptsRun(String testName) {
 		super(testName);
 	}
@@ -57,7 +43,7 @@ public class TestScriptsRun extends TestCase {
 		PlayerLuaLibrary.setPlayers(players);
 
 		PropertyLoader.init("/config/properties.json");
-		BoardLuaLibrary.setBoard(new Board(0, 0, "/config/board.json", new MockJFrame()));
+		BoardLuaLibrary.setBoard(new Board(0, 0, "/config/board.json", null));
 		Notification.init(300, 300);
 
 		// Loop through every script in the scripts directory
