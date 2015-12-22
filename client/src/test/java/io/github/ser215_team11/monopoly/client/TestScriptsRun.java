@@ -3,20 +3,18 @@ package io.github.ser215_team11.monopoly.client;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
-import junit.framework.Assert;
 
 import org.luaj.vm2.Globals;
-import org.luaj.vm2.LuaError;
 import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.lib.jse.JsePlatform;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseListener;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.charset.StandardCharsets;
 import java.io.IOException;
-import java.net.URI;
 import java.util.ArrayList;
 
 /**
@@ -45,12 +43,7 @@ public class TestScriptsRun extends TestCase {
 		PlayerLuaLibrary.setPlayers(players);
 
 		PropertyLoader.init("/config/properties.json");
-		try {
-			BoardLuaLibrary.setBoard(new Board(0, 0, "/config/board.json", new JFrame()));
-		} catch(Exception e) {
-			fail(e.getCause().getMessage());
-		}
-
+		BoardLuaLibrary.setBoard(new Board(0, 0, "/config/board.json", null));
 		Notification.init(300, 300);
 
 		// Loop through every script in the scripts directory
@@ -69,13 +62,7 @@ public class TestScriptsRun extends TestCase {
 				String script = new String(data, StandardCharsets.UTF_8);
 				Globals globals = JsePlatform.standardGlobals();
 				LuaValue chunk = globals.load(script);
-				try {
-					chunk.call();
-				} catch(LuaError e) {
-					if(!(e.getCause() instanceof LuaLibrary.ScriptNotImplementedException)) {
-						throw e;
-					}
-				}
+				chunk.call();
 			}
 		});
 	}

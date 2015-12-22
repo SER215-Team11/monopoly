@@ -94,7 +94,10 @@ public class Board {
                         throw new RuntimeException("could not find property information for property space " + name);
                     }
                     spaces[i] = new PropertySpace(property);
-                    parentFrame.addMouseListener((PropertySpace) spaces[i]);
+                    if(parentFrame != null) {
+                        // The parent frame might be null if the program is being run headless for testing
+                        parentFrame.addMouseListener((PropertySpace) spaces[i]);
+                    }
                     break;
                 case "card":
                     spaces[i] = new CardSpace(name, jsonSpace.getString("config"));
