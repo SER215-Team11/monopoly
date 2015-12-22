@@ -3,20 +3,18 @@ package io.github.ser215_team11.monopoly.client;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
-import junit.framework.Assert;
 
 import org.luaj.vm2.Globals;
-import org.luaj.vm2.LuaError;
 import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.lib.jse.JsePlatform;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseListener;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.charset.StandardCharsets;
 import java.io.IOException;
-import java.net.URI;
 import java.util.ArrayList;
 
 /**
@@ -24,6 +22,20 @@ import java.util.ArrayList;
  * error.
  */
 public class TestScriptsRun extends TestCase {
+
+	/**
+	 * Actual JFrames require a window manager when being interacted with.
+	 * This mocks the methods that we need for testing that would normally fail
+	 * on a system without a window manager.
+	 */
+	private class MockJFrame extends JFrame {
+		public MockJFrame() {
+		}
+
+		@Override
+		public void addMouseListener(MouseListener listener) {
+		}
+	}
 
 	public TestScriptsRun(String testName) {
 		super(testName);
@@ -45,7 +57,7 @@ public class TestScriptsRun extends TestCase {
 		PlayerLuaLibrary.setPlayers(players);
 
 		PropertyLoader.init("/config/properties.json");
-		BoardLuaLibrary.setBoard(new Board(0, 0, "/config/board.json", new JFrame()));
+		BoardLuaLibrary.setBoard(new Board(0, 0, "/config/board.json", new MockJFrame()));
 		Notification.init(300, 300);
 
 		// Loop through every script in the scripts directory
