@@ -45,12 +45,7 @@ public class TestScriptsRun extends TestCase {
 		PlayerLuaLibrary.setPlayers(players);
 
 		PropertyLoader.init("/config/properties.json");
-		try {
-			BoardLuaLibrary.setBoard(new Board(0, 0, "/config/board.json", new JFrame()));
-		} catch(Exception e) {
-			fail(e.getCause().getMessage());
-		}
-
+		BoardLuaLibrary.setBoard(new Board(0, 0, "/config/board.json", new JFrame()));
 		Notification.init(300, 300);
 
 		// Loop through every script in the scripts directory
@@ -69,13 +64,7 @@ public class TestScriptsRun extends TestCase {
 				String script = new String(data, StandardCharsets.UTF_8);
 				Globals globals = JsePlatform.standardGlobals();
 				LuaValue chunk = globals.load(script);
-				try {
-					chunk.call();
-				} catch(LuaError e) {
-					if(!(e.getCause() instanceof LuaLibrary.ScriptNotImplementedException)) {
-						throw e;
-					}
-				}
+				chunk.call();
 			}
 		});
 	}
